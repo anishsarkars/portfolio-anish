@@ -5,7 +5,7 @@ import SocialIcon from '@/components/SocialIcon';
 import BackgroundEffect from '@/components/BackgroundEffect';
 import CallToAction from '@/components/CallToAction';
 import ParallaxContainer from '@/components/ParallaxContainer';
-import { Home, Mail, Calendar, ArrowRight, Linkedin } from 'lucide-react';
+import { Home, Mail, Calendar, ArrowRight, Linkedin, Github, Twitter } from 'lucide-react';
 
 const Index = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -82,7 +82,7 @@ const Index = () => {
           </motion.div>
           <motion.div variants={item}>
             <SocialIcon 
-              href="mailto:hello@example.com" 
+              href="mailto:hello@anishsarkar.com" 
               icon={<Mail className="w-5 h-5 text-white/90" />} 
               label="Email" 
             />
@@ -99,6 +99,15 @@ const Index = () => {
               href="https://www.linkedin.com/in/anishsarkar-/" 
               icon={<Linkedin className="w-5 h-5 text-white/90" />} 
               label="LinkedIn" 
+              className="bg-[#0077B5]/20"
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <SocialIcon 
+              href="https://github.com/anishsarkar" 
+              icon={<Github className="w-5 h-5 text-white/90" />} 
+              label="GitHub"
+              className="bg-[#333]/20" 
             />
           </motion.div>
         </motion.div>
@@ -113,7 +122,7 @@ const Index = () => {
           <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-white/30 glass group">
             <img 
               src="/lovable-uploads/19c442ef-4588-401e-b6a5-99f293652cd8.png" 
-              alt="Profile" 
+              alt="Anish Sarkar" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -128,7 +137,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
           >
-            <span className="text-gradient inline-block">Coming Soon</span>
+            <span className="text-gradient inline-block">Anish Sarkar</span>
           </motion.h1>
         </ParallaxContainer>
         
