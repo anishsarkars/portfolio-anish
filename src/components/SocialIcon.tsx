@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { cn } from "@/lib/utils";
 
 interface SocialIconProps {
@@ -11,21 +12,35 @@ interface SocialIconProps {
 
 const SocialIcon: React.FC<SocialIconProps> = ({ href, icon, label, className }) => {
   return (
-    <a 
+    <motion.a 
       href={href} 
       target="_blank" 
       rel="noopener noreferrer"
       aria-label={label}
       className={cn(
-        "flex items-center justify-center w-10 h-10 rounded-full glass backdrop-blur-md transition-all duration-300",
-        "hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] group",
+        "flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-md transition-all duration-300 relative",
+        "border border-white/20 bg-white/10 hover:bg-white/20 shadow-lg",
         className
       )}
+      whileHover={{ 
+        scale: 1.1,
+        boxShadow: "0 0 20px rgba(255,255,255,0.3)" 
+      }}
+      whileTap={{ scale: 0.95 }}
     >
-      <div className="transform transition-transform duration-300 group-hover:rotate-[360deg]">
-        {icon}
+      {/* Glass reflection effect */}
+      <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-[10%] right-[50%] h-[40%] bg-white/20 rounded-full transform -skew-x-12"></div>
       </div>
-    </a>
+      
+      <motion.div 
+        className="z-10 text-white"
+        whileHover={{ rotate: 360 }}
+        transition={{ type: "spring", damping: 10, stiffness: 100 }}
+      >
+        {icon}
+      </motion.div>
+    </motion.a>
   );
 };
 
