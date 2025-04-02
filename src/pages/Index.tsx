@@ -1,25 +1,21 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SocialIcon from '@/components/SocialIcon';
-import BackgroundEffect from '@/components/BackgroundEffect';
 import CallToAction from '@/components/CallToAction';
 import ParallaxContainer from '@/components/ParallaxContainer';
-import { Home, Mail, Calendar, ArrowRight, Linkedin } from 'lucide-react';
+import { BorderBeam } from '@/components/magicui/border-beam';
+import { Home, Mail, Calendar, ArrowRight, Linkedin, Sun, Moon } from 'lucide-react';
+import { Marquee } from '@/components/magicui/marquee';
+import { Meteors } from '@/components/magicui/meteors';
+import { useTheme } from '@/hooks/useTheme';
+import { Dock, DockItem } from '@/components/magicui/dock';
 
 const Index = () => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isMounted, setIsMounted] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   
   useEffect(() => {
     setIsMounted(true);
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   
   if (!isMounted) return null;
@@ -49,69 +45,60 @@ const Index = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative px-4 py-20 overflow-hidden">
-      <BackgroundEffect />
+    <div className={`h-screen flex flex-col items-center justify-center relative overflow-hidden ${theme}`}>
+      {/* Background with Meteors */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-[#0c0c0c] dark:via-[#111111] dark:to-[#161616]" />
+        <Meteors 
+          number={12} 
+          className={theme === 'dark' ? 'opacity-85' : 'opacity-30'} 
+        />
+      </div>
       
-      {/* Custom cursor spotlight effect */}
-      <div 
-        className="fixed pointer-events-none opacity-70 rounded-full mix-blend-screen z-10"
-        style={{
-          background: 'radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%)',
-          width: '400px',
-          height: '400px',
-          transform: `translate(${cursorPosition.x - 200}px, ${cursorPosition.y - 200}px)`,
-          transition: 'transform 0.1s ease-out',
-        }}
-      />
+      {/* Theme Toggle Button */}
+      <motion.button
+        onClick={toggleTheme}
+        className="fixed top-4 right-4 p-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg z-50"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {theme === 'dark' ? (
+          <Sun className="w-5 h-5 text-yellow-400" />
+        ) : (
+          <Moon className="w-5 h-5 text-gray-600" />
+        )}
+      </motion.button>
+      
+      {/* Dock Navigation */}
+      <Dock className="fixed top-4 left-1/2 transform -translate-x-1/2">
+        <DockItem href="/" label="Home" active={true}>
+          <Home className="w-5 h-5 text-gray-800 dark:text-white/90" />
+        </DockItem>
+        <DockItem href="mailto:chat@anishsarkar.site" label="Email">
+          <Mail className="w-5 h-5 text-gray-800 dark:text-white/90" />
+        </DockItem>
+        <DockItem href="https://www.linkedin.com/in/anishsarkar-/" label="LinkedIn">
+          <Linkedin className="w-5 h-5 text-gray-800 dark:text-white/90" />
+        </DockItem>
+      </Dock>
       
       {/* Main content container */}
-      <div className="w-full max-w-xl mx-auto z-20">
-        {/* Navigation/Social Icons */}
+      <div className="w-full max-w-xl mx-auto z-20 px-4">
+        {/* Profile Image with hover effect and border beam */}
         <motion.div 
-          className="flex justify-center mb-12 space-x-4"
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.div variants={item}>
-            <SocialIcon 
-              href="/" 
-              icon={<Home className="w-5 h-5 text-white/90" />} 
-              label="Homepage" 
-            />
-          </motion.div>
-          <motion.div variants={item}>
-            <SocialIcon 
-              href="mailto:hello@example.com" 
-              icon={<Mail className="w-5 h-5 text-white/90" />} 
-              label="Email" 
-            />
-          </motion.div>
-          <motion.div variants={item}>
-            <SocialIcon 
-              href="https://cal.com/anishsarkar/" 
-              icon={<Calendar className="w-5 h-5 text-white/90" />} 
-              label="Calendar" 
-            />
-          </motion.div>
-          <motion.div variants={item}>
-            <SocialIcon 
-              href="https://www.linkedin.com/in/anishsarkar-/" 
-              icon={<Linkedin className="w-5 h-5 text-white/90" />} 
-              label="LinkedIn" 
-              className="bg-[#0077B5]/20"
-            />
-          </motion.div>
-        </motion.div>
-        
-        {/* Profile Image with hover effect */}
-        <motion.div 
-          className="flex justify-center mb-8"
+          className="flex justify-center mb-6 relative"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
         >
-          <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-white/30 glass group">
+          <div className="relative w-24 h-24 rounded-full overflow-hidden glass group z-10 shadow-lg">
+            <BorderBeam 
+              size={80}
+              colorFrom="rgba(108, 99, 255, 0.8)"
+              colorTo="rgba(47, 166, 187, 0.8)"
+              duration={4}
+              className="z-10"
+            />
             <img 
               src="/lovable-uploads/19c442ef-4588-401e-b6a5-99f293652cd8.png" 
               alt="Profile" 
@@ -121,10 +108,10 @@ const Index = () => {
           </div>
         </motion.div>
         
-        <ParallaxContainer speed={0.03} className="mb-3">
+        <ParallaxContainer speed={0.03} className="mb-2">
           {/* Heading */}
           <motion.h1 
-            className="text-4xl sm:text-6xl font-bold text-center"
+            className="text-4xl sm:text-5xl font-bold text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
@@ -135,17 +122,17 @@ const Index = () => {
         
         {/* Subheading */}
         <motion.div 
-          className="text-center mb-8"
+          className="text-center mb-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p className="text-xl sm:text-2xl font-light text-foreground/80">Designer & Developer</p>
+          <p className="text-lg sm:text-xl font-light text-gray-700 dark:text-gray-200">Designer & Developer</p>
         </motion.div>
         
         {/* Description */}
         <motion.p 
-          className="text-center text-foreground/70 max-w-md mx-auto mb-12"
+          className="text-center text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8 text-sm sm:text-base"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
@@ -155,7 +142,7 @@ const Index = () => {
         
         {/* CTA Buttons */}
         <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -181,6 +168,16 @@ const Index = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom Loading Marquee */}
+      <motion.div
+        className="fixed bottom-0 left-0 right-0 w-full bg-gradient-to-b from-transparent to-black/5 backdrop-blur-sm"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.7 }}
+      >
+        <Marquee speed={30} className="py-1" />
+      </motion.div>
     </div>
   );
 };
