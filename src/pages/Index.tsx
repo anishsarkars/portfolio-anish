@@ -99,6 +99,7 @@ const Index = () => {
               href="https://www.linkedin.com/in/anishsarkar-/" 
               icon={<Linkedin className="w-5 h-5 text-white/90" />} 
               label="LinkedIn" 
+              className="bg-[#0077B5]/20"
             />
           </motion.div>
         </motion.div>
