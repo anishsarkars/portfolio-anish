@@ -18,7 +18,7 @@ const ParallaxContainer: React.FC<ParallaxContainerProps> = ({
     const container = containerRef.current;
     if (!container) return;
     
-    let animationFrameId: number;
+    let animationFrameId: number | null = null;
     let lastScrollY = window.scrollY;
     
     const handleScroll = () => {
@@ -35,7 +35,9 @@ const ParallaxContainer: React.FC<ParallaxContainerProps> = ({
     animationFrameId = requestAnimationFrame(handleScroll);
     
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, [speed]);
   
