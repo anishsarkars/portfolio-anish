@@ -140,7 +140,7 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Solving real-world problems with innovative tech — from IoT
+                  Solving real-world problems with innovative tech, from IoT
                   systems to blockchain applications.
                 </p>
               </div>

@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "AI/ML Engineer with hands-on experience building scalable AI agents, automation systems, and workflow tools. I specialise in Machine Learning, Deep Learning, NLP, and backend development with Python and FastAPI.",
   summary:
-    "AI/ML Engineer passionate about building intelligent systems. Currently working on multi-agent workflows and building [ContextMemory](https://github.com/samiksha0shukla/context-memory) — a memory system for AI applications. I specialise in Machine Learning, Deep Learning, NLP, and backend development with Python and FastAPI.",
+    "AI/ML Engineer passionate about building intelligent systems. Currently working on multi-agent workflows and building [ContextMemory](https://github.com/samiksha0shukla/context-memory), a memory system for AI applications. I specialise in Machine Learning, Deep Learning, NLP, and backend development with Python and FastAPI.",
   avatarUrl: "/me.png",
   skills: [
     "Machine Learning",
@@ -76,7 +76,7 @@ export const DATA = {
       start: "August 2024",
       end: "December 2024",
       description:
-        "• Spearheaded Jess chatbot for Jessup Cellars, achieving 78% user satisfaction through testing optimization\n• Orchestrated data pipelines processing 2K+ daily data points, improving model performance by 40%\n• Architected AI sentiment analysis system processing 5K+ Hebrew posts with 87% translation accuracy\n• Collaborated with teams to deliver 3 specialized AI agents, reducing manual processing time by 35%",
+        "• Spearheaded Jess chatbot for Jessup Cellars, achieving 78% user satisfaction\n\n• Orchestrated data pipelines processing 2K+ daily data points, improving model performance by 40%\n\n• Architected AI sentiment analysis system processing 5K+ Hebrew posts with 87% accuracy\n\n• Delivered 3 specialized AI agents, reducing manual processing time by 35%",
     },
     {
       company: "Munshot",
@@ -88,7 +88,7 @@ export const DATA = {
       start: "August 2025",
       end: "September 2025",
       description:
-        "• Developed an AI agent for a Singapore-based financial services client for automated information retrieval and task execution\n• Worked with multi-agent AI workflows, contributing to context-sharing and coordination between agents\n• Designed prompting logic including system prompts and instructions for task execution\n• Collaborated with the team to test, debug, and refine the agent's performance while documenting the development process",
+        "• Developed an AI agent for Singapore-based financial services client\n\n• Worked with multi-agent AI workflows for context-sharing and coordination\n\n• Designed prompting logic including system prompts for task execution\n\n• Tested, debugged, and refined agent performance",
     },
   ],
   education: [
@@ -108,7 +108,7 @@ export const DATA = {
       //dates: "2024 - Present",
       active: true,
       description:
-        "• Enables AI applications to remember context across conversations\n• Automatically extracts and stores important facts from conversations\n• Uses semantic search to retrieve relevant context when needed\n• Handles deduplication and contradictions intelligently\n• Production-ready with SQLite/PostgreSQL support\n• Available as an open-source pip package on PyPI",
+        "A memory system for AI apps that remembers context across conversations. Extracts and stores facts, uses semantic search for retrieval, handles deduplication intelligently. Available as an open-source pip package.",
       technologies: [
         "Python",
         "OpenAI",
@@ -140,7 +140,7 @@ export const DATA = {
       //dates: "2024",
       active: true,
       description:
-        "• MCP-powered system that generates Pydantic AI agents\n• Uses multi-agent LangGraph workflow for intelligent processing\n• Crawls and chunks documentation automatically\n• Stores data in Supabase with OpenAI embeddings\n• Provides semantic search and RAG-based answers\n• Preserves code blocks and integrates with AI IDEs",
+        "MCP-powered system that generates Pydantic AI agents using multi-agent LangGraph workflows. Crawls and chunks docs, stores in Supabase with OpenAI embeddings. Provides semantic search and RAG-based answers.",
       technologies: [
         "Agentic AI",
         "MultiAgent Workflow",
@@ -172,7 +172,7 @@ export const DATA = {
       //dates: "2024",
       active: true,
       description:
-        "Your Smart Companion for Real Estate Price Prediction, Analytics, and Recommendations. A comprehensive real estate platform that leverages machine learning for accurate price predictions and personalized property recommendations.",
+        "Smart companion for real estate price prediction and analytics. Leverages ML for accurate predictions and personalized property recommendations.",
       technologies: [
         "Python",
         "Machine Learning",
@@ -199,7 +199,7 @@ export const DATA = {
       //dates: "2024",
       active: true,
       description:
-        "A visual workflow automation platform inspired by n8n, built with React and FastAPI, enabling users to design, connect, and automate workflows in real time. Features a drag-and-drop interface for creating complex automation pipelines.",
+        "Visual workflow automation platform built with React and FastAPI. Design, connect, and automate workflows in real time with a drag-and-drop interface.",
       technologies: [
         "React",
         "FastAPI",
@@ -224,7 +224,7 @@ export const DATA = {
       href: "https://arxiv.org/pdf/1706.03762",
       active: true,
       description:
-        "• Deep dive into 'Attention Is All You Need' paper\n• Implementing transformer architecture from scratch\n• Studying self-attention mechanisms and positional encodings\n• Exploring applications in NLP and beyond\n• Ongoing research and experimentation",
+        "Deep dive into 'Attention Is All You Need' paper. Implementing transformer architecture from scratch, studying self-attention mechanisms and positional encodings.",
       technologies: [
         "PyTorch",
         "Transformers",
@@ -248,7 +248,7 @@ export const DATA = {
       href: "https://arxiv.org/pdf/2510.04871",
       active: true,
       description:
-        "• Researching efficient recursive model architectures\n• Studying parameter-efficient approaches for LLMs\n• Exploring recursive computation in neural networks\n• Investigating memory and compute optimization\n• Active research in progress",
+        "Researching efficient recursive model architectures and parameter-efficient approaches for LLMs. Exploring recursive computation and memory optimization in neural networks.",
       technologies: [
         "PyTorch",
         "LLMs",
