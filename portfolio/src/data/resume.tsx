@@ -66,18 +66,6 @@ export const DATA = {
 
   work: [
     {
-      company: "Computer Market Hub",
-      href: "https://computermarkethub.com",
-      badges: [],
-      location: "Remote",
-      title: "Artificial Intelligence Intern",
-      logoUrl: "/cmhlogo.jpeg",
-      start: "August 2024",
-      end: "December 2024",
-      description:
-        "• Spearheaded Jess chatbot for Jessup Cellars, achieving 78% user satisfaction\n\n• Orchestrated data pipelines processing 2K+ daily data points, improving model performance by 40%\n\n• Architected AI sentiment analysis system processing 5K+ Hebrew posts with 87% accuracy\n\n• Delivered 3 specialized AI agents, reducing manual processing time by 35%",
-    },
-    {
       company: "Munshot",
       badges: [],
       href: "https://munshot.com",
@@ -87,13 +75,24 @@ export const DATA = {
       start: "August 2025",
       end: "September 2025",
       description:
-        "• Developed an AI agent for Singapore-based financial services client\n\n• Worked with multi-agent AI workflows for context-sharing and coordination\n\n• Designed prompting logic including system prompts for task execution\n\n• Tested, debugged, and refined agent performance",
+        "• Developed an AI agent for Singapore-based financial services client\n• Worked with multi-agent AI workflows for context-sharing and coordination\n• Designed prompting logic including system prompts for task execution\n• Tested, debugged, and refined agent performance",
+    },
+    {
+      company: "Computer Market Hub",
+      href: "https://computermarkethub.com",
+      badges: [],
+      location: "Remote",
+      title: "Artificial Intelligence Intern",
+      logoUrl: "/cmhlogo.jpeg",
+      start: "August 2024",
+      end: "December 2024",
+      description:
+        "• Spearheaded Jess chatbot for Jessup Cellars, achieving 78% user satisfaction\n• Orchestrated data pipelines processing 2K+ daily data points, improving model performance by 40%\n• Architected AI sentiment analysis system processing 5K+ Hebrew posts with 87% accuracy\n• Delivered 3 specialized AI agents, reducing manual processing time by 35%",
     },
   ],
   education: [
     {
       school: "Baderia Global Institute of Engineering and Management",
-      href: "https://bgiem.ac.in",
       degree: "Bachelor of Technology in Computer Science",
       logoUrl: "/RGPVLOGO.jpeg",
       start: "2021",
