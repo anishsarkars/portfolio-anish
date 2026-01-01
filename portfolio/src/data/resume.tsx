@@ -93,6 +93,7 @@ export const DATA = {
   education: [
     {
       school: "Baderia Global Institute of Engineering and Management",
+      href: "",
       degree: "Bachelor of Technology in Computer Science",
       logoUrl: "/RGPVLOGO.jpeg",
       start: "2021",
