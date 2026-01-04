@@ -55,6 +55,12 @@ export const DATA = {
         icon: Icons.x,
         navbar: true,
       },
+      Cal: {
+        name: "Book a Call",
+        url: "https://cal.com/samiksha-shukla-03/30min",
+        icon: Icons.calendar,
+        navbar: true,
+      },
       email: {
         name: "Send Email",
         url: "#",

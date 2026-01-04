@@ -29,6 +29,29 @@ export default function Page() {
                 delay={BLUR_FADE_DELAY * 2}
                 text="Building intelligent AI agents that remember and reason."
               />
+              <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
+                <Link
+                  href="mailto:samikshasy2908@gmail.com"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline transition-all mt-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="size-4"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                  samikshasy2908@gmail.com
+                </Link>
+              </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-36 border">
