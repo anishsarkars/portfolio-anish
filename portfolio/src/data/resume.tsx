@@ -135,11 +135,7 @@ export const DATA = {
           href: "https://pypi.org/project/contextmemory/",
           icon: <Icons.globe className="size-3" />,
         },
-        {
-          type: "Source",
-          href: "https://github.com/samiksha0shukla/context-memory",
-          icon: <Icons.github className="size-3" />,
-        },
+
       ],
       image: "",
       video: "",
