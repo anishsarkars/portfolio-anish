@@ -113,7 +113,7 @@ export const DATA = {
       //dates: "2024 - Present",
       active: true,
       description:
-        "A memory system for AI apps that remembers context across conversations. Extracts and stores facts, uses semantic search for retrieval, handles deduplication intelligently. Available as an open-source pip package.",
+        "A memory system for AI apps that builds context graphs from interactions. Extracts facts as connected semantic and episodic memories, enables intelligent retrieval, and powers contextual responses across conversations.",
       technologies: [
         "Python",
         "OpenAI",
@@ -127,6 +127,11 @@ export const DATA = {
       links: [
         {
           type: "Website",
+          href: "https://www.contextmemory.online/",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Package",
           href: "https://pypi.org/project/contextmemory/",
           icon: <Icons.globe className="size-3" />,
         },
