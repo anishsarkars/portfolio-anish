@@ -8,7 +8,7 @@ export const DATA = {
   location: "India",
   locationLink: "https://www.google.com/maps/place/india",
   description:
-    "IT Undergraduate | Frontend & Product Engineer | UI/UX | Startup & Research Experience",
+    "Developer & Designer ✦\nI craft elegant digital experiences with attention to detail and a focus on user experience\n\n› Ex Intern Intervue.io, DRDO",
   summary:
     "I’m Anish Sarkar, a Undergrad Information Technology undergraduate passionate about building and shipping real-world products. I work at the intersection of frontend engineering, UI/UX design, product thinking, and execution. I’ve collaborated with startups, early-stage products, and research organizations, focusing on turning ideas into usable, scalable solutions. I enjoy fast iteration, clean design, and solving problems end-to-end—from idea to deployment.",
   avatarUrl: "/profile.png",
