@@ -27,11 +27,11 @@ export default function Page() {
               <BlurFadeText
                 className="max-w-[600px] md:text-xl text-muted-foreground"
                 delay={BLUR_FADE_DELAY * 2}
-                text="Building intelligent AI agents that remember and reason."
+                text={DATA.description}
               />
               <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
                 <Link
-                  href="mailto:samikshasy2908@gmail.com"
+                  href={DATA.contact.social.email.url}
                   className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline transition-all mt-2"
                 >
                   <svg
@@ -49,7 +49,7 @@ export default function Page() {
                     <rect width="20" height="16" x="2" y="4" rx="2" />
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                   </svg>
-                  samikshasy2908@gmail.com
+                  {DATA.contact.email}
                 </Link>
               </BlurFade>
             </div>
@@ -123,9 +123,7 @@ export default function Page() {
                   Check out my latest work
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  I&apos;ve worked on a variety of AI/ML projects, from memory
-                  systems to workflow automation platforms. Here are a few of my
-                  favorites.
+                  I&apos;ve worked on a variety of projects, from startups to research organizations. Here are a few of my favorites.
                 </p>
               </div>
             </div>
@@ -163,8 +161,7 @@ export default function Page() {
                   I like building things
                 </h2>
                 <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Solving real-world problems with innovative tech, from IoT
-                  systems to blockchain applications.
+                  Participating in hackathons and competitions to build rapid prototypes and solve real problems.
                 </p>
               </div>
             </div>
