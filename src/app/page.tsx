@@ -5,6 +5,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { StarsBackground } from "@/components/ui/stars-background";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -13,7 +14,16 @@ const BLUR_FADE_DELAY = 0.04;
 
 export default function Page() {
   return (
-    <main className="flex flex-col min-h-[100dvh] space-y-10">
+    <main className="flex flex-col min-h-[100dvh] space-y-10 relative z-10">
+      <StarsBackground
+        starDensity={0.0002}
+        allStarsTwinkle={true}
+        twinkleProbability={0.7}
+        minStarSize={0.6}
+        maxStarSize={1.2}
+        className="opacity-100 z-[-1] pointer-events-none"
+        starColor="#808080"
+      />
       <section id="hero">
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
@@ -24,11 +34,11 @@ export default function Page() {
                 yOffset={8}
                 text={`Hi, I'm ${DATA.name.split(" ")[0]}`}
               />
-              <BlurFadeText
-                className="max-w-[600px] md:text-xl text-muted-foreground whitespace-pre-line"
-                delay={BLUR_FADE_DELAY * 2}
-                text={DATA.description}
-              />
+              <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                <span className="max-w-[600px] md:text-xl text-muted-foreground whitespace-pre-line inline-block">
+                  {DATA.description}
+                </span>
+              </BlurFade>
               <BlurFade delay={BLUR_FADE_DELAY * 2.5}>
                 <Link
                   href={DATA.contact.social.email.url}
