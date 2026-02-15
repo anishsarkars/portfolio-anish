@@ -147,7 +147,7 @@ export const DATA = {
   projects: [
     {
       title: "Diagramr",
-      href: "#",
+      href: "https://diagramr.vercel.app",
       active: true,
       description:
         "Built and launched a product that ranked Top 15 on Product Hunt with ₹0 marketing spend.",
@@ -158,7 +158,7 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://diagramr.site",
+          href: "https://diagramr.vercel.app",
           icon: <Icons.globe className="size-3" />,
         },
       ],
