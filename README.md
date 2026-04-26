@@ -1,47 +1,39 @@
-<div align="center">
-<img alt="Portfolio" src="https://github.com/dillionverma/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
-</div>
+# Anish Sarkar Portfolio
 
-# Portfolio [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdillionverma%2Fportfolio)
+A minimal, pixel-perfect dev portfolio based on the design of [chanhdai.com](https://github.com/ncdai/chanhdai.com).
 
-Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
+## Features
 
-# Features
+- **Next.js 16** (App Router, Turbopack)
+- **Tailwind CSS v4**
+- **Framer Motion** for animations
+- **Shadcn UI** components
+- **MDX** support for blogs and components
+- **Responsive design** with a focus on details
 
-- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
-- Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
-- Includes a blog
-- Responsive for different devices
-- Optimized for Next.js and Vercel
+## Getting Started
 
-# Getting Started Locally
-
-1. Clone this repository to your local machine:
-
-   ```bash
-   git clone https://github.com/dillionverma/portfolio
-   ```
-
-2. Move to the cloned directory
-
-   ```bash
-   cd portfolio
-   ```
-
-3. Install dependencies:
-
+1. Install dependencies:
    ```bash
    pnpm install
    ```
 
-4. Start the local Server:
-
+2. Run the development server:
    ```bash
    pnpm dev
    ```
 
-5. Open the [Config file](./src/data/resume.tsx) and make changes
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-# License
+## Data Migration
 
-Licensed under the [MIT license](https://github.com/dillionverma/portfolio/blob/main/LICENSE.md).
+All data is stored in `src/features/portfolio/data/`. You can update your info there:
+- `user.ts`: Basic info, bio, avatar.
+- `experiences.tsx`: Work history and education.
+- `projects.ts`: Your projects.
+- `social-links.ts`: Your social profiles.
+- `awards.ts`: Hackathons and awards.
+
+## Credits
+
+Original design and template by [Nguyen Chanh Dai](https://github.com/ncdai/chanhdai.com).

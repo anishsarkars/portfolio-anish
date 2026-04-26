@@ -1,73 +1,124 @@
-import Navbar from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { DATA } from "@/data/resume";
-import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import "./globals.css";
+import "@/styles/globals.css"
 
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import { GoogleTagManager } from "@next/third-parties/google"
+import type { Metadata, Viewport } from "next"
+import Script from "next/script"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
+import type { WebSite, WithContext } from "schema-dts"
+
+import { Providers } from "@/components/providers"
+import { META_THEME_COLORS, SITE_INFO, X_HANDLE } from "@/config/site"
+import { USER } from "@/features/portfolio/data/user"
+import { fontVariables } from "@/lib/fonts"
+
+function getWebSiteJsonLd(): WithContext<WebSite> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_INFO.name,
+    url: SITE_INFO.url,
+    alternateName: [USER.username],
+  }
+}
+
+// Thanks @shadcn-ui, @tailwindcss
+const darkModeScript = String.raw`
+  try {
+    if (localStorage.theme === 'dark' || ((!('theme' in localStorage) || localStorage.theme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '${META_THEME_COLORS.dark}')
+    }
+  } catch (_) {}
+
+  try {
+    if (/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+      document.documentElement.classList.add('os-macos')
+    }
+  } catch (_) {}
+`
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
+  metadataBase: new URL(SITE_INFO.url),
   title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
+    template: `%s – ${SITE_INFO.name}`,
+    default: `${USER.displayName} – ${USER.jobTitle}`,
   },
-  description: DATA.description,
-  openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
-    url: DATA.url,
-    siteName: `${DATA.name}`,
-    locale: "en_US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+  description: SITE_INFO.description,
+  keywords: SITE_INFO.keywords,
+  authors: [
+    {
+      name: "Anish Sarkar",
+      url: SITE_INFO.url,
     },
+  ],
+  creator: "Anish Sarkar",
+  openGraph: {
+    siteName: SITE_INFO.name,
+    url: "/",
+    type: "profile",
+    locale: "en_US",
+    firstName: USER.firstName,
+    lastName: USER.lastName,
+    username: USER.username,
+    gender: USER.gender,
+    images: [
+      {
+        url: SITE_INFO.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE_INFO.name,
+      },
+    ],
   },
   twitter: {
-    title: `${DATA.name}`,
     card: "summary_large_image",
+    site: X_HANDLE,
+    creator: X_HANDLE,
+    images: [SITE_INFO.ogImage],
   },
-  verification: {
-    google: "",
-    yandex: "",
-  },
-};
+
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: META_THEME_COLORS.light,
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
-        )}
-      >
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
-          </TooltipProvider>
-        </ThemeProvider>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <head>
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{ __html: darkModeScript }}
+        />
+        {/*
+          Thanks @tailwindcss. We inject the script via the `<Script/>` tag again,
+          since we found the regular `<script>` tag to not execute when rendering a not-found page.
+         */}
+        <Script src={`data:text/javascript;base64,${btoa(darkModeScript)}`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getWebSiteJsonLd()).replace(/</g, "\\u003c"),
+          }}
+        />
+      </head>
+
+      {process.env.NEXT_PUBLIC_GTM_ID && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      )}
+
+      <body>
+        <Providers>
+          <NuqsAdapter>{children}</NuqsAdapter>
+        </Providers>
       </body>
     </html>
-  );
+  )
 }
