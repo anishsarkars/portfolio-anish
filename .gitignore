@@ -1,0 +1,40 @@
+# dependencies
+/node_modules
+
+# astro
+/dist/
+/.astro/
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env*
+!.env.example
+.dev.vars
+
+# typescript
+*.tsbuildinfo
+
+# Cloudflare local dev state
+.wrangler/
+
+# Vercel
+.vercel/
+
+# SDD scratch
+.superpowers/
+
+# agent tooling (skills CLI + local Claude settings)
+.agents/
+.claude/
+skills-lock.json

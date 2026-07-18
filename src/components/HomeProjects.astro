@@ -1,0 +1,42 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../data/projects';
+import { parseRepo, fetchRepoStars, resolveGithubToken } from '../lib/github';
+// Rendered at build time. Stars are only fetched for projects that have a
+// GitHub link; with none, no network calls happen and no token is needed.
+const token = await resolveGithubToken();
+const withStars = await Promise.all(projects.map(async (p) => {
+  const r = p.githubLink ? parseRepo(p.githubLink) : null;
+  return { ...p, stars: r ? await fetchRepoStars(r.owner, r.repo, token) : 0 };
+}));
+const initialCount = 3;
+const initial = withStars.slice(0, initialCount);
+const rest = withStars.slice(initialCount);
+---
+<div class="mt-1">{initial.map((p) => <ProjectCard {...p} />)}</div>
+{rest.length > 0 && (
+  <Fragment>
+    <div id="home-projects-more" class="mt-1" hidden>{rest.map((p) => <ProjectCard {...p} />)}</div>
+    <button type="button" id="home-projects-toggle"
+      class="mt-3 text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+      View {rest.length} more
+    </button>
+    <script is:inline>
+      (() => {
+        const btn = document.getElementById('home-projects-toggle');
+        const more = document.getElementById('home-projects-more');
+        if (!btn || !more) return;
+        const total = more.querySelectorAll(':scope > *').length;
+        btn.addEventListener('click', () => {
+          if (more.hasAttribute('hidden')) {
+            more.removeAttribute('hidden');
+            btn.textContent = 'View less';
+          } else {
+            more.setAttribute('hidden', '');
+            btn.textContent = `View ${total} more`;
+          }
+        });
+      })();
+    </script>
+  </Fragment>
+)}

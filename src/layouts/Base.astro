@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import VisitorCount from '../components/VisitorCount.astro';
+import CommandMenu from '../components/CommandMenu.tsx';
+import { FooterBrand } from '../components/name-brand';
+import { AutoTOCMinimap } from '../components/auto-toc-minimap';
+import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+// `toc` selects which headings become scroll-minimap ticks (section h2s by default).
+// `image` is the social card; pages (e.g. blog posts) can pass their own.
+const {
+  title = 'Anish Sarkar · Founder & Product Engineer',
+  description = 'I build products from scratch. Founder building ZELP, an AI-powered healthcare platform, and shipping products people actually use.',
+  image = '/og.png',
+  ogType = 'website',
+  toc = 'main h2',
+} = Astro.props;
+const siteName = 'Anish Sarkar';
+// Always point canonical at the configured production domain (Astro.site),
+// so a workers.dev or any mirror host can't compete for ranking.
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : Astro.url.href;
+// Social scrapers need an absolute image URL.
+const ogImage = new URL(image, Astro.site ?? Astro.url).href;
+const commandItems = [
+  { label: 'Home', href: '/', group: 'Pages' },
+  { label: 'Projects', href: '/projects', group: 'Pages' },
+  ...projects.map((p) => ({
+    label: p.title,
+    href: p.liveLink ?? p.githubLink ?? '/projects',
+    group: 'Projects',
+    external: true,
+    keywords: [p.description, p.impact].filter(Boolean) as string[],
+  })),
+  ...profile.socials.map((s) => ({ label: s.label, href: s.href, group: 'Links', external: true })),
+  { label: 'Email', href: `mailto:${profile.email}`, group: 'Links', external: true },
+  { label: 'Book a call', href: profile.bookCall, group: 'Links', external: true },
+  { label: 'Website', href: profile.website, group: 'Links', external: true },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (LinkedIn, Discord, Slack, Facebook) -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={title} />
+    <script is:inline>
+      const t = localStorage.getItem('theme');
+      const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', dark);
+    </script>
+    <script defer src="https://cdn.databuddy.cc/databuddy.js"></script>
+  </head>
+  <body class="min-h-screen bg-background text-foreground">
+    <!-- Grid system: the content lives on a centered "sheet" framed by vertical
+         hairlines; full-bleed horizontal hairlines divide it at real section
+         boundaries. Same frame on every page. -->
+    <main class="mx-auto min-h-dvh max-w-2xl border-x border-border px-6">
+      <Nav />
+      <div class="-mx-6 border-b border-border" aria-hidden="true"></div>
+      <nav aria-label="On this page" class="fixed top-1/2 right-6 z-40 hidden -translate-y-1/2 xl:block">
+        <!-- client:idle, not client:visible: the island renders empty until headings load,
+             so a visibility trigger would never fire (zero-size element never intersects). -->
+        <AutoTOCMinimap client:idle selector={toc} />
+      </nav>
+      <slot />
+      <footer class="-mx-6 mt-24 border-t border-border px-6 pt-3">
+        <div class="flex justify-end pb-1"><VisitorCount /></div>
+        <div class="-mx-6 aspect-[22/1] overflow-hidden text-foreground [&>astro-island]:block [&>astro-island]:size-full">
+          <FooterBrand client:visible />
+        </div>
+      </footer>
+    </main>
+    <CommandMenu client:idle items={commandItems} />
+  </body>
+</html>
