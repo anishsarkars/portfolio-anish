@@ -5,6 +5,7 @@ export const experience: ExperienceItemType[] = [
     id: 'flip',
     companyName: 'Flip',
     companyLogo: '/logos/flip.png',
+    isCurrentEmployer: true,
     positions: [
       {
         id: 'flip-designer',
