@@ -1,26 +1,66 @@
 ---
 import Base from '../layouts/Base.astro';
-import { HeroTagline } from '../components/HeroTagline';
 import { WorkExperience } from '../components/work-experience';
 import HomeProjects from '../components/HomeProjects.astro';
 import HeroSocials from '../components/HeroSocials.astro';
 import { profile } from '../data/profile';
 import { experience } from '../data/experience';
+
+const websiteLabel = profile.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const metaLabel = 'text-[11px] font-medium uppercase tracking-wider text-muted-foreground';
+const metaValue = 'mt-1.5 flex items-center gap-1.5 text-sm text-foreground/90';
+const metaIcon = 'size-3.5 shrink-0 text-muted-foreground';
 ---
 <Base>
   <section class="py-10">
-    <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+    <div class="flex items-center gap-4">
       <img
         src="/anish.webp"
         alt={profile.name}
-        class="size-24 shrink-0 rounded-full object-cover ring-2 ring-border sm:size-33"
+        class="size-14 shrink-0 rounded-2xl object-cover ring-1 ring-border sm:size-16"
       />
       <div>
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">{profile.name}</h1>
-        <p class="mt-2"><HeroTagline client:visible /></p>
+        <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">{profile.name}</h1>
+        <p class="mt-1 text-sm text-muted-foreground">{profile.role}</p>
       </div>
     </div>
-    <p class="mt-5 max-w-prose text-sm leading-relaxed text-foreground/75">{profile.bio}</p>
+
+    <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
+      <div>
+        <dt class={metaLabel}>Location</dt>
+        <dd class={metaValue}>
+          <svg class={metaIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>{profile.location}</span>
+        </dd>
+      </div>
+      <div class="min-w-0">
+        <dt class={metaLabel}>Email</dt>
+        <dd class={metaValue}>
+          <svg class={metaIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="20" height="16" x="2" y="4" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          <a href={`mailto:${profile.email}`} class="truncate transition-colors hover:text-foreground hover:underline">{profile.email}</a>
+        </dd>
+      </div>
+      <div>
+        <dt class={metaLabel}>Website</dt>
+        <dd class={metaValue}>
+          <svg class={metaIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M2 12h20" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z" />
+          </svg>
+          <a href={profile.website} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-foreground hover:underline">{websiteLabel}</a>
+        </dd>
+      </div>
+    </dl>
+
+    <p class="mt-8 max-w-prose text-sm leading-relaxed text-foreground/75">{profile.bio}</p>
+
     <HeroSocials />
   </section>
 
