@@ -4,6 +4,7 @@ export const experience: ExperienceItemType[] = [
   {
     id: 'flip',
     companyName: 'Flip',
+    companyLogo: '/logos/flip.png',
     positions: [
       {
         id: 'flip-designer',
@@ -18,6 +19,7 @@ export const experience: ExperienceItemType[] = [
   {
     id: 'greenflow',
     companyName: 'GreenFlow Ventures',
+    companyLogo: '/logos/greenflow.jpeg',
     positions: [
       {
         id: 'greenflow-pe',
@@ -31,6 +33,7 @@ export const experience: ExperienceItemType[] = [
   {
     id: 'tgn',
     companyName: 'TGN Ventures',
+    companyLogo: '/logos/tgn.jpg',
     positions: [
       {
         id: 'tgn-fellow',
@@ -58,19 +61,6 @@ export const experience: ExperienceItemType[] = [
     ],
   },
   {
-    id: 'gdgoc',
-    companyName: 'GDGOC - CDGI',
-    companyLogo: '/logos/gdgoc.png',
-    positions: [
-      {
-        id: 'gdgoc-lead',
-        title: 'Lead',
-        employmentPeriod: { start: '08.2025' },
-        description: `- Leading developer community initiatives, impacting 3,000+ students.`,
-      },
-    ],
-  },
-  {
     id: 'intervue',
     companyName: 'Intervue.io',
     companyLogo: '/logos/intervue.png',
@@ -89,6 +79,7 @@ export const experience: ExperienceItemType[] = [
   {
     id: 'drdo',
     companyName: 'Defence Research and Development Laboratory (DRDL) — DRDO',
+    companyLogo: '/logos/DRDO-logo.png',
     positions: [
       {
         id: 'drdo-intern',
