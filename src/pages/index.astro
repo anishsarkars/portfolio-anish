@@ -5,6 +5,7 @@ import { WorkExperience } from '../components/work-experience';
 import HomeProjects from '../components/HomeProjects.astro';
 import HeroSocials from '../components/HeroSocials.astro';
 import { HorizontalDepthFade } from '../components/unlumen-ui/horizontal-depth-fade';
+import { SpotlightReveal } from '../components/unlumen-ui/spotlight-reveal';
 import { profile } from '../data/profile';
 import { experience } from '../data/experience';
 
@@ -150,4 +151,16 @@ const metaIcon = 'size-3.5 shrink-0 text-muted-foreground';
     scrollLength={240}
     className="-mx-6"
   />
+
+  <section class="-mx-6 border-t border-border">
+    <SpotlightReveal
+      client:only="react"
+      baseImage="https://soft-zoom-63098134.figma.site/_assets/v11/5c9f982199fde1d9b85a20e5396f0fa7bacaf9a3.png?w=2560"
+      revealImage="https://soft-zoom-63098134.figma.site/_assets/v11/6be2165e31648955b4e071f4cf2a50bc572b9bfd.png?w=1536"
+      bigText="Visuals"
+      headline="Design & product work — interfaces, brand, and the small details in between."
+      ctaLabel="Start a project"
+      ctaHref={profile.bookCall}
+    />
+  </section>
 </Base>
