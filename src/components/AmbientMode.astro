@@ -65,33 +65,33 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     --air-col: rgba(255, 255, 255, 0.9);
   }
 
-  /* constant #F45555 red wash that keeps gently moving */
+  /* subtle constant #F45555 red wash that keeps gently moving */
   #ambient-petals::before {
     content: '';
     position: absolute;
     inset: -6%;
     background:
-      radial-gradient(130% 75% at 50% 112%, rgba(244, 85, 85, 0.18), transparent 58%),
-      radial-gradient(120% 62% at 50% -12%, rgba(244, 85, 85, 0.13), transparent 62%);
-    animation: air-breathe 12s ease-in-out infinite alternate,
-      wash-move 16s ease-in-out infinite;
+      radial-gradient(130% 75% at 50% 112%, rgba(244, 85, 85, 0.08), transparent 60%),
+      radial-gradient(120% 62% at 50% -12%, rgba(244, 85, 85, 0.06), transparent 64%);
+    animation: air-breathe 14s ease-in-out infinite alternate,
+      wash-move 18s ease-in-out infinite;
   }
-  /* constant #F45555 vignette all around the page, pulsing */
+  /* subtle constant #F45555 vignette all around the page, gently pulsing */
   #ambient-petals::after {
     content: '';
     position: absolute;
     inset: 0;
-    animation: vignette-pulse 7s ease-in-out infinite;
+    animation: vignette-pulse 9s ease-in-out infinite;
   }
 
   @keyframes wash-move {
     0% { transform: scale(1) translate3d(0, 0, 0); }
-    50% { transform: scale(1.08) translate3d(1.5%, -1.5%, 0); }
+    50% { transform: scale(1.05) translate3d(1%, -1%, 0); }
     100% { transform: scale(1) translate3d(0, 0, 0); }
   }
   @keyframes vignette-pulse {
-    0%, 100% { box-shadow: inset 0 0 150px 40px rgba(244, 85, 85, 0.14); }
-    50% { box-shadow: inset 0 0 220px 74px rgba(244, 85, 85, 0.22); }
+    0%, 100% { box-shadow: inset 0 0 130px 30px rgba(244, 85, 85, 0.06); }
+    50% { box-shadow: inset 0 0 170px 48px rgba(244, 85, 85, 0.1); }
   }
 
   /* shared drifting particles: petals, leaves, flakes — carried on a breeze */
@@ -266,8 +266,8 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
 
     // ===== Canvas snowfall (Originkit) — coral-red drift while sound is on =====
     const SNOW = {
-      count: 355, sMin: 0.6, sMax: 0.7, sizeMin: 1, sizeMax: 4,
-      oMin: 0.3, oMax: 0.77, wind: 0, windVar: 0.8, color: '#f45555',
+      count: 130, sMin: 0.5, sMax: 0.7, sizeMin: 1, sizeMax: 3,
+      oMin: 0.18, oMax: 0.45, wind: 0, windVar: 0.7, color: '#f45555',
     };
     const canvas = document.getElementById('ambient-canvas');
     let sctx = null;
@@ -379,7 +379,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       el.style.setProperty('--w', (lowBias ? rand(420, 680) : rand(280, 480)).toFixed(0) + 'px');
       el.style.setProperty('--fall', rand(26, 44).toFixed(2) + 's');
       el.style.setProperty('--delay', (-rand(0, 44)).toFixed(2) + 's');
-      el.style.setProperty('--o', (lowBias ? rand(0.28, 0.5) : rand(0.18, 0.36)).toFixed(3));
+      el.style.setProperty('--o', (lowBias ? rand(0.1, 0.2) : rand(0.06, 0.13)).toFixed(3));
       return el;
     };
 
@@ -390,7 +390,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       el.style.setProperty('--h', rand(2, 6).toFixed(1) + 'px');
       el.style.setProperty('--fall', rand(14, 26).toFixed(2) + 's');
       el.style.setProperty('--delay', (-rand(0, 26)).toFixed(2) + 's');
-      el.style.setProperty('--o', rand(0.16, 0.32).toFixed(3));
+      el.style.setProperty('--o', rand(0.06, 0.14).toFixed(3));
       return el;
     };
 
@@ -398,12 +398,12 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       if (built) return;
       built = true;
       const frag = document.createDocumentFragment();
-      for (let i = 0; i < 26; i++) frag.appendChild(makeFalling('petal', PETAL_COLORS, 9, 20, 0.8, 11, 22, 0.75, 0.96));
-      for (let i = 0; i < 8; i++) frag.appendChild(makeFalling('leaf', LEAF_COLORS, 13, 24, 0.62, 16, 30, 0.65, 0.9));
-      for (let i = 0; i < 18; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 4, 9, 1, 14, 26, 0.6, 0.95));
-      for (let i = 0; i < 6; i++) frag.appendChild(makeSmoke(true));
-      for (let i = 0; i < 4; i++) frag.appendChild(makeSmoke(false));
-      for (let i = 0; i < 4; i++) frag.appendChild(makeAir());
+      for (let i = 0; i < 12; i++) frag.appendChild(makeFalling('petal', PETAL_COLORS, 8, 16, 0.8, 12, 24, 0.4, 0.62));
+      for (let i = 0; i < 4; i++) frag.appendChild(makeFalling('leaf', LEAF_COLORS, 12, 20, 0.62, 18, 32, 0.38, 0.58));
+      for (let i = 0; i < 8; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 3, 7, 1, 16, 28, 0.3, 0.55));
+      for (let i = 0; i < 2; i++) frag.appendChild(makeSmoke(true));
+      for (let i = 0; i < 2; i++) frag.appendChild(makeSmoke(false));
+      for (let i = 0; i < 2; i++) frag.appendChild(makeAir());
       layer.appendChild(frag);
     };
 
