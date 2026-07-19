@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
+import Loader from '../components/Loader.astro';
 import AmbientMode from '../components/AmbientMode.astro';
 import CommandMenu from '../components/CommandMenu.tsx';
 import { FooterBrand } from '../components/name-brand';
@@ -69,10 +70,19 @@ const commandItems = [
       const t = localStorage.getItem('theme');
       const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.classList.toggle('dark', dark);
+      // Intro loader: show once per session; otherwise skip it before paint.
+      try {
+        if (sessionStorage.getItem('loader-shown') === '1') {
+          document.documentElement.classList.add('loader-done');
+        } else {
+          document.documentElement.classList.add('loading');
+        }
+      } catch (e) {}
     </script>
     <script defer src="https://cdn.databuddy.cc/databuddy.js"></script>
   </head>
   <body class="min-h-screen bg-background text-foreground">
+    <Loader />
     <!-- Grid system: the content lives on a centered "sheet" framed by vertical
          hairlines; full-bleed horizontal hairlines divide it at real section
          boundaries. Same frame on every page. -->

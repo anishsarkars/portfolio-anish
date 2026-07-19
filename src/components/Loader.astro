@@ -1,0 +1,124 @@
+---
+// Intro loading screen — shows once per session on the first page load.
+// Rendered inline (no island) so it paints instantly with no hydration flash.
+---
+
+<div
+  id="site-loader"
+  class="fixed inset-0 z-[9999] bg-[#0a0a0a] text-[#f5f5f5]"
+  style="font-family: var(--font-sans), sans-serif;"
+>
+  <span class="loader-label absolute left-6 top-6 text-xs uppercase tracking-[0.3em] text-[#888888]">Portfolio</span>
+
+  <div class="flex h-full items-center justify-center">
+    <span
+      id="loader-word"
+      class="loader-word text-4xl italic text-[#f5f5f5]/80 md:text-6xl lg:text-7xl"
+    >Design</span>
+  </div>
+
+  <span
+    id="loader-count"
+    class="loader-serif absolute bottom-7 right-6 text-6xl tabular-nums text-[#f5f5f5] md:text-8xl lg:text-9xl"
+  >000</span>
+
+  <div class="absolute inset-x-0 bottom-0 h-[3px] bg-[#1f1f1f]/50">
+    <div
+      id="loader-bar"
+      class="h-full origin-left"
+      style="transform: scaleX(0); background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%); box-shadow: 0 0 8px rgba(137, 170, 204, 0.35);"
+    ></div>
+  </div>
+</div>
+
+<style>
+  #loader-word,
+  #loader-count {
+    font-family: "Instrument Serif", ui-serif, Georgia, serif;
+  }
+  #loader-word {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .loader-label {
+    animation: loader-in-down 0.5s ease-out both;
+  }
+  #loader-count {
+    animation: loader-fade 0.6s ease-out both;
+    animation-delay: 0.15s;
+  }
+  @keyframes loader-in-down {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes loader-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  #site-loader {
+    transition: opacity 0.6s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .loader-label,
+    #loader-count { animation: none; }
+    #loader-word { transition: none; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const el = document.getElementById('site-loader');
+    if (!el) return;
+
+    // Already shown this session — remove immediately, don't animate.
+    if (root.classList.contains('loader-done')) {
+      el.remove();
+      return;
+    }
+
+    const wordEl = document.getElementById('loader-word');
+    const countEl = document.getElementById('loader-count');
+    const bar = document.getElementById('loader-bar');
+    const words = ['Design', 'Create', 'Inspire'];
+    let wi = 0;
+
+    const rotate = window.setInterval(() => {
+      wi = (wi + 1) % words.length;
+      wordEl.style.opacity = '0';
+      wordEl.style.transform = 'translateY(-20px)';
+      window.setTimeout(() => {
+        wordEl.textContent = words[wi];
+        wordEl.style.transform = 'translateY(20px)';
+        requestAnimationFrame(() => {
+          wordEl.style.opacity = '1';
+          wordEl.style.transform = 'translateY(0)';
+        });
+      }, 220);
+    }, 900);
+
+    const finish = () => {
+      window.clearInterval(rotate);
+      try { sessionStorage.setItem('loader-shown', '1'); } catch (e) {}
+      window.setTimeout(() => {
+        el.style.opacity = '0';
+        root.classList.remove('loading');
+        window.setTimeout(() => {
+          root.classList.add('loader-done');
+          el.remove();
+        }, 600);
+      }, 400);
+    };
+
+    const DURATION = 2700;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / DURATION);
+      const count = Math.round(t * 100);
+      countEl.textContent = String(count).padStart(3, '0');
+      bar.style.transform = 'scaleX(' + (count / 100) + ')';
+      if (t < 1) requestAnimationFrame(tick);
+      else finish();
+    };
+    requestAnimationFrame(tick);
+  })();
+</script>

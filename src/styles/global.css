@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource-variable/inter";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
 @plugin "@tailwindcss/typography";
 
 /* class-based dark mode (Tailwind v4 defaults to prefers-color-scheme) */
@@ -255,4 +257,13 @@ html.jp-anim,
 html.jp-anim * {
   transition: background-color 0.6s ease, border-color 0.6s ease,
     color 0.6s ease, fill 0.6s ease !important;
+}
+
+/* ===== Intro loading screen ===== */
+html.loading,
+html.loading body {
+  overflow: hidden;
+}
+html.loader-done #site-loader {
+  display: none !important;
 }
