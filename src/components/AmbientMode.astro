@@ -29,6 +29,25 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   </span>
 </button>
 
+<div id="ambient-hint" class="pointer-events-none fixed bottom-[4.6rem] right-4 z-[71] flex items-end gap-2 opacity-0" aria-hidden="true">
+  <span class="hint-bubble">Turn on sound</span>
+  <span class="hint-samurai">
+    <svg width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <!-- maedate crest (crescent) -->
+      <path d="M9 17C9 6 39 6 39 17C33 10 15 10 9 17Z" fill="var(--samurai-gold)" />
+      <!-- helmet dome -->
+      <path d="M11 30C11 18 37 18 37 30Z" fill="var(--samurai-dark)" />
+      <path d="M24 19V30" stroke="var(--samurai-gold)" stroke-width="1.2" stroke-linecap="round" />
+      <!-- fukigaeshi side flares -->
+      <path d="M10 29L6 32L12 33Z" fill="var(--samurai-gold)" />
+      <path d="M38 29L42 32L36 33Z" fill="var(--samurai-gold)" />
+      <!-- menpo face -->
+      <path d="M15 30H33V33C33 38 15 38 15 33Z" fill="var(--samurai-face)" />
+      <path d="M18.5 33.2H22.5M25.5 33.2H29.5" stroke="var(--samurai-dark)" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+  </span>
+</div>
+
 <audio id="ambient-audio" src={track} loop preload="none"></audio>
 
 <style>
@@ -140,9 +159,52 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   #ambient-toggle.is-on .ambient-icon { display: none; }
   #ambient-toggle.is-on .ambient-bars { display: inline-flex; }
 
+  /* first-visit samurai hint over the sound button */
+  #ambient-hint {
+    transform: translateY(6px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  #ambient-hint.show { opacity: 1; transform: translateY(0); }
+  .hint-bubble {
+    padding: 5px 8px;
+    border-radius: 8px;
+    background: var(--foreground);
+    color: var(--background);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  }
+  .hint-samurai {
+    --samurai-dark: #3b3742;
+    --samurai-gold: #cba24d;
+    --samurai-face: #56515e;
+    position: relative;
+    display: block;
+    animation: samurai-bob 1.9s ease-in-out infinite;
+  }
+  .hint-samurai svg { display: block; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22)); }
+  .hint-samurai::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: var(--samurai-face);
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 1px;
+  }
+  @keyframes samurai-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #ambient-petals *,
-    .ambient-bars i {
+    .ambient-bars i,
+    .hint-samurai {
       animation: none !important;
     }
   }
@@ -157,9 +219,11 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     if (!btn || !audio || !layer) return;
 
     const TARGET = 0.32;
+    const root = document.documentElement;
     let on = false;
     let built = false;
     let fadeTimer = 0;
+    let animTimer = 0;
 
     const rand = (min, max) => min + Math.random() * (max - min);
 
@@ -246,6 +310,11 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       btn.classList.toggle('is-on', on);
       btn.setAttribute('aria-pressed', String(on));
       layer.style.opacity = on ? '1' : '0';
+      // Japanese palette morph (smooth only during the toggle).
+      root.classList.add('jp-anim');
+      root.classList.toggle('jp', on);
+      window.clearTimeout(animTimer);
+      animTimer = window.setTimeout(() => root.classList.remove('jp-anim'), 700);
       localStorage.setItem(KEY, on ? '1' : '0');
       if (on) {
         buildPetals();
@@ -256,6 +325,24 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     };
 
     btn.addEventListener('click', () => setOn(!on, true));
+
+    // First-visit hint: a little samurai over the sound button.
+    const HINT_KEY = 'ambient-hint-seen';
+    const hint = document.getElementById('ambient-hint');
+    if (hint) {
+      if (localStorage.getItem(HINT_KEY) === '1' || localStorage.getItem(KEY) === '1') {
+        hint.remove();
+      } else {
+        const dismiss = () => {
+          localStorage.setItem(HINT_KEY, '1');
+          hint.classList.remove('show');
+          window.setTimeout(() => hint.remove(), 500);
+        };
+        window.setTimeout(() => hint.classList.add('show'), 900);
+        btn.addEventListener('click', dismiss, { once: true });
+        window.setTimeout(dismiss, 10000);
+      }
+    }
 
     if (localStorage.getItem(KEY) === '1') setOn(true, true);
   })();

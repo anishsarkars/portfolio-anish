@@ -204,3 +204,55 @@ h1, h2, h3 { letter-spacing: -0.01em; }
     }
   }
 }
+
+/* ===== Ambient "Japanese" theme (active while ambient mode is on) =====
+   Warm washi-paper light + sumi-ink text; warm indigo night for dark.
+   Subtle shift from the default zinc palette. */
+html.jp {
+  --background: hsl(40 36% 96%);
+  --foreground: hsl(24 16% 18%);
+  --loader-bg: hsl(40 36% 96%);
+  --card: hsl(42 40% 97.5%);
+  --card-foreground: hsl(24 16% 18%);
+  --popover: hsl(42 40% 97.5%);
+  --popover-foreground: hsl(24 16% 18%);
+  --primary: hsl(222 24% 32%);
+  --primary-foreground: hsl(40 40% 97%);
+  --secondary: hsl(38 26% 90%);
+  --secondary-foreground: hsl(24 16% 20%);
+  --muted: hsl(38 26% 90%);
+  --muted-foreground: hsl(28 12% 42%);
+  --accent: hsl(36 30% 89%);
+  --accent-foreground: hsl(24 16% 20%);
+  --border: hsl(34 22% 83%);
+  --input: hsl(34 22% 83%);
+  --ring: hsl(6 52% 52%);
+}
+
+html.jp.dark {
+  --background: hsl(258 14% 10%);
+  --foreground: hsl(40 30% 92%);
+  --loader-bg: hsl(258 14% 10%);
+  --card: hsl(258 13% 14%);
+  --card-foreground: hsl(40 30% 92%);
+  --popover: hsl(258 13% 14%);
+  --popover-foreground: hsl(40 30% 92%);
+  --primary: hsl(40 30% 90%);
+  --primary-foreground: hsl(258 13% 14%);
+  --secondary: hsl(255 12% 18%);
+  --secondary-foreground: hsl(40 30% 92%);
+  --muted: hsl(255 12% 18%);
+  --muted-foreground: hsl(38 14% 66%);
+  --accent: hsl(255 12% 18%);
+  --accent-foreground: hsl(40 30% 92%);
+  --border: hsl(40 30% 92% / 12%);
+  --input: hsl(40 30% 92% / 16%);
+  --ring: hsl(6 60% 58%);
+}
+
+/* Smooth the palette morph only during the toggle (avoids permanent hover lag) */
+html.jp-anim,
+html.jp-anim * {
+  transition: background-color 0.6s ease, border-color 0.6s ease,
+    color 0.6s ease, fill 0.6s ease !important;
+}
