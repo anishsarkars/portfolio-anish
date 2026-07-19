@@ -2,13 +2,13 @@ import { motion } from 'motion/react';
 import { TextFlip } from './text-flip';
 
 const titles = [
-  'Founder & Product Engineer',
+  'Design & Product Engineer',
   'Building ZELP',
   'Product Builder',
-  'Startup Founder',
   'Software Engineer',
   'Growth + GTM',
   'Product Designer',
+  'Devrel',
 ];
 
 export function HeroRole() {
