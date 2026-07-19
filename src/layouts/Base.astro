@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
+import AmbientMode from '../components/AmbientMode.astro';
 import CommandMenu from '../components/CommandMenu.tsx';
 import { FooterBrand } from '../components/name-brand';
 import { AutoTOCMinimap } from '../components/auto-toc-minimap';
@@ -91,5 +92,6 @@ const commandItems = [
       </footer>
     </main>
     <CommandMenu client:idle items={commandItems} />
+    <AmbientMode />
   </body>
 </html>
