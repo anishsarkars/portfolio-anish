@@ -9,7 +9,9 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   id="ambient-petals"
   class="pointer-events-none fixed inset-0 z-[60] overflow-hidden opacity-0 transition-opacity duration-700"
   aria-hidden="true"
-></div>
+>
+  <canvas id="ambient-canvas" class="absolute inset-0 block h-full w-full"></canvas>
+</div>
 
 <button
   id="ambient-toggle"
@@ -70,14 +72,27 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     background:
       radial-gradient(130% 75% at 50% 112%, rgba(198, 60, 82, 0.12), transparent 58%),
       radial-gradient(120% 60% at 50% -12%, rgba(255, 183, 206, 0.13), transparent 62%);
-    animation: air-breathe 14s ease-in-out infinite alternate;
+    animation: air-breathe 14s ease-in-out infinite alternate,
+      wash-hue 34s linear infinite;
   }
-  /* warm cinematic vignette all around the page */
+  /* subtle cinematic vignette that slowly shifts colour all around the page */
   #ambient-petals::after {
     content: '';
     position: absolute;
     inset: 0;
-    box-shadow: inset 0 0 180px 50px rgba(120, 22, 40, 0.12);
+    animation: vignette-cycle 32s ease-in-out infinite;
+  }
+
+  @keyframes wash-hue {
+    from { filter: hue-rotate(0deg); }
+    to { filter: hue-rotate(360deg); }
+  }
+  @keyframes vignette-cycle {
+    0% { box-shadow: inset 0 0 170px 46px rgba(120, 22, 40, 0.11); }
+    25% { box-shadow: inset 0 0 170px 46px rgba(58, 44, 120, 0.10); }
+    50% { box-shadow: inset 0 0 170px 46px rgba(150, 96, 32, 0.10); }
+    75% { box-shadow: inset 0 0 170px 46px rgba(30, 92, 92, 0.10); }
+    100% { box-shadow: inset 0 0 170px 46px rgba(120, 22, 40, 0.11); }
   }
 
   /* shared drifting particles: petals, leaves, flakes — carried on a breeze */
@@ -228,6 +243,8 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
 
   @media (prefers-reduced-motion: reduce) {
     #ambient-petals *,
+    #ambient-petals::before,
+    #ambient-petals::after,
     .ambient-bars i,
     .hint-samurai {
       animation: none !important;
@@ -249,6 +266,88 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     let built = false;
     let fadeTimer = 0;
     let animTimer = 0;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ===== Canvas snowfall (Originkit) — coral-red drift while sound is on =====
+    const SNOW = {
+      count: 355, sMin: 0.6, sMax: 0.7, sizeMin: 1, sizeMax: 4,
+      oMin: 0.3, oMax: 0.77, wind: 0, windVar: 0.8, color: '#ff7f7f',
+    };
+    const canvas = document.getElementById('ambient-canvas');
+    let sctx = null;
+    let snowRaf = 0;
+    let snowReady = false;
+    let snowRO = null;
+    let SW = 0;
+    let SH = 0;
+    let flakes = [];
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rnd = (a, b) => a + Math.random() * (b - a);
+
+    const snowBuild = () => {
+      const rect = canvas.getBoundingClientRect();
+      SW = Math.max(1, Math.floor(rect.width || window.innerWidth));
+      SH = Math.max(1, Math.floor(rect.height || window.innerHeight));
+      canvas.width = Math.floor(SW * dpr);
+      canvas.height = Math.floor(SH * dpr);
+      canvas.style.width = SW + 'px';
+      canvas.style.height = SH + 'px';
+      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = SNOW.count;
+      flakes = new Array(n);
+      for (let i = 0; i < n; i++) {
+        flakes[i] = {
+          x: Math.random() * SW, y: Math.random() * SH,
+          r: rnd(SNOW.sizeMin, SNOW.sizeMax), vy: rnd(SNOW.sMin, SNOW.sMax),
+          vx: rnd(-1, 1), phase: Math.random() * Math.PI * 2,
+          sway: rnd(0.2, 0.9), alpha: rnd(SNOW.oMin, SNOW.oMax),
+        };
+      }
+    };
+
+    const snowDraw = () => {
+      sctx.clearRect(0, 0, SW, SH);
+      sctx.fillStyle = SNOW.color;
+      for (let i = 0; i < flakes.length; i++) {
+        const f = flakes[i];
+        sctx.globalAlpha = f.alpha;
+        sctx.beginPath();
+        sctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        sctx.fill();
+      }
+      sctx.globalAlpha = 1;
+    };
+
+    const snowLoop = (t) => {
+      for (let i = 0; i < flakes.length; i++) {
+        const f = flakes[i];
+        f.y += f.vy;
+        f.x += SNOW.wind + f.vx * SNOW.windVar + Math.sin(t * 0.0012 + f.phase) * f.sway;
+        if (f.y - f.r > SH) { f.y = -f.r; f.x = Math.random() * SW; }
+        if (f.x < -f.r) f.x = SW + f.r;
+        else if (f.x > SW + f.r) f.x = -f.r;
+      }
+      snowDraw();
+      snowRaf = requestAnimationFrame(snowLoop);
+    };
+
+    const snowStart = () => {
+      if (!canvas || reduceMotion) return;
+      if (!snowReady) {
+        sctx = canvas.getContext('2d');
+        if (!sctx) return;
+        snowBuild();
+        snowReady = true;
+        snowRO = new ResizeObserver(() => { snowBuild(); snowDraw(); });
+        snowRO.observe(canvas);
+      }
+      if (!snowRaf) snowRaf = requestAnimationFrame(snowLoop);
+    };
+
+    const snowStop = () => {
+      if (snowRaf) { cancelAnimationFrame(snowRaf); snowRaf = 0; }
+    };
 
     const rand = (min, max) => min + Math.random() * (max - min);
 
@@ -350,8 +449,10 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       localStorage.setItem(KEY, on ? '1' : '0');
       if (on) {
         buildPetals();
+        snowStart();
         if (withAudio) tryPlay();
       } else {
+        snowStop();
         fadeTo(0);
       }
     };
