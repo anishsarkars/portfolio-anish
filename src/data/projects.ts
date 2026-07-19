@@ -13,6 +13,12 @@ export type Project = {
 // Ordered by what to lead with: the first three surface on the home page.
 export const projects: Project[] = [
   {
+    id: 'seenly',
+    title: 'Seenly',
+    description: 'A new product I\'m building.',
+    liveLink: 'https://seenly.tech',
+  },
+  {
     id: 'zelp',
     title: 'ZELP',
     description: 'AI-powered healthcare platform that helps patients discover the right diagnostic tests and instantly book nearby hospitals and diagnostic centres.',
@@ -31,12 +37,6 @@ export const projects: Project[] = [
     title: 'CleanClip',
     description: 'AI background remover for videos.',
     liveLink: 'https://cleanclip.vercel.app',
-  },
-  {
-    id: 'seenly',
-    title: 'Seenly',
-    description: 'A new product I\'m building.',
-    liveLink: 'https://seenly.tech',
   },
   {
     id: 'cleankeyboard',

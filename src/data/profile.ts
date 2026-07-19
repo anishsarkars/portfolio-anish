@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Anish Sarkar',
   role: 'Founder & Product Engineer',
-  bio: 'I build products from scratch. Currently building ZELP, an AI-powered healthcare platform that helps patients find the right diagnostic tests and instantly book nearby hospitals and diagnostic centres. I started coding at 16 and care about shipping products people actually use.',
+  bio: "I'm a product-focused engineer and founder who loves turning ideas into products people actually use. I enjoy building across product, engineering, design, and growth, with a strong bias toward shipping fast and solving real-world problems.",
   location: 'Indore, India',
   email: 'anish99sarkar@gmail.com',
   bookCall: 'https://cal.com/anishsarkar',

@@ -2,11 +2,11 @@
   <style>
     @media (prefers-color-scheme: dark) {
       .bg { fill: #fafafa }
-      .fg { fill: #18181b }
+      .fg { stroke: #18181b }
     }
   </style>
-  <rect class="bg" width="100" height="100" rx="20" fill="#18181b"/>
-  <text class="fg" x="50" y="54" fill="#fafafa"
-    font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="66" font-weight="700"
-    text-anchor="middle" dominant-baseline="central">A</text>
+  <rect class="bg" width="100" height="100" rx="22" fill="#18181b"/>
+  <path class="fg" fill="none" stroke="#fafafa" stroke-width="9"
+    stroke-linecap="round" stroke-linejoin="round"
+    d="M30 73 L50 27 L70 73 M39.5 57 H60.5"/>
 </svg>
