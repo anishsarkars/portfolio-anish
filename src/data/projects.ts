@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     id: 'seenly',
     title: 'Seenly',
-    description: 'A new product I\'m building.',
+    description: 'Record a 60-second intro, build your profile, and share one link with every recruiter.',
     liveLink: 'https://seenly.tech',
   },
   {
