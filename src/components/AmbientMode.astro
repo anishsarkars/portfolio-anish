@@ -65,34 +65,33 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     --air-col: rgba(255, 255, 255, 0.9);
   }
 
+  /* constant #F45555 red wash that keeps gently moving */
   #ambient-petals::before {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -6%;
     background:
-      radial-gradient(130% 75% at 50% 112%, rgba(198, 60, 82, 0.12), transparent 58%),
-      radial-gradient(120% 60% at 50% -12%, rgba(255, 183, 206, 0.13), transparent 62%);
-    animation: air-breathe 14s ease-in-out infinite alternate,
-      wash-hue 34s linear infinite;
+      radial-gradient(130% 75% at 50% 112%, rgba(244, 85, 85, 0.18), transparent 58%),
+      radial-gradient(120% 62% at 50% -12%, rgba(244, 85, 85, 0.13), transparent 62%);
+    animation: air-breathe 12s ease-in-out infinite alternate,
+      wash-move 16s ease-in-out infinite;
   }
-  /* subtle cinematic vignette that slowly shifts colour all around the page */
+  /* constant #F45555 vignette all around the page, pulsing */
   #ambient-petals::after {
     content: '';
     position: absolute;
     inset: 0;
-    animation: vignette-cycle 32s ease-in-out infinite;
+    animation: vignette-pulse 7s ease-in-out infinite;
   }
 
-  @keyframes wash-hue {
-    from { filter: hue-rotate(0deg); }
-    to { filter: hue-rotate(360deg); }
+  @keyframes wash-move {
+    0% { transform: scale(1) translate3d(0, 0, 0); }
+    50% { transform: scale(1.08) translate3d(1.5%, -1.5%, 0); }
+    100% { transform: scale(1) translate3d(0, 0, 0); }
   }
-  @keyframes vignette-cycle {
-    0% { box-shadow: inset 0 0 170px 46px rgba(120, 22, 40, 0.11); }
-    25% { box-shadow: inset 0 0 170px 46px rgba(58, 44, 120, 0.10); }
-    50% { box-shadow: inset 0 0 170px 46px rgba(150, 96, 32, 0.10); }
-    75% { box-shadow: inset 0 0 170px 46px rgba(30, 92, 92, 0.10); }
-    100% { box-shadow: inset 0 0 170px 46px rgba(120, 22, 40, 0.11); }
+  @keyframes vignette-pulse {
+    0%, 100% { box-shadow: inset 0 0 150px 40px rgba(244, 85, 85, 0.14); }
+    50% { box-shadow: inset 0 0 220px 74px rgba(244, 85, 85, 0.22); }
   }
 
   /* shared drifting particles: petals, leaves, flakes — carried on a breeze */
@@ -268,7 +267,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     // ===== Canvas snowfall (Originkit) — coral-red drift while sound is on =====
     const SNOW = {
       count: 355, sMin: 0.6, sMax: 0.7, sizeMin: 1, sizeMax: 4,
-      oMin: 0.3, oMax: 0.77, wind: 0, windVar: 0.8, color: '#ff7f7f',
+      oMin: 0.3, oMax: 0.77, wind: 0, windVar: 0.8, color: '#f45555',
     };
     const canvas = document.getElementById('ambient-canvas');
     let sctx = null;
