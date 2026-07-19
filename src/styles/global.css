@@ -267,3 +267,9 @@ html.loading body {
 html.loader-done #site-loader {
   display: none !important;
 }
+
+/* ===== Custom site-wide cursor ===== */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}

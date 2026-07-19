@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Loader from '../components/Loader.astro';
 import AmbientMode from '../components/AmbientMode.astro';
+import UserCursor from '../components/UserCursor.tsx';
 import CommandMenu from '../components/CommandMenu.tsx';
 import { FooterBrand } from '../components/name-brand';
 import { AutoTOCMinimap } from '../components/auto-toc-minimap';
@@ -103,5 +104,6 @@ const commandItems = [
     </main>
     <CommandMenu client:idle items={commandItems} />
     <AmbientMode />
+    <UserCursor client:load name="hi" size={31} />
   </body>
 </html>
