@@ -36,28 +36,86 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(120% 60% at 50% -10%, rgba(255, 183, 206, 0.14), transparent 60%);
-  }
-  #ambient-petals .petal {
-    position: absolute;
-    top: -8vh;
-    animation: petal-fall var(--fall, 12s) linear infinite;
-    animation-delay: var(--delay, 0s);
-  }
-  #ambient-petals .petal > i {
-    display: block;
-    border-radius: 100% 0 55% 50% / 55% 0 100% 50%;
-    opacity: 0.75;
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06));
-    animation: petal-sway var(--sway, 4s) ease-in-out infinite alternate;
+    background: radial-gradient(120% 60% at 50% -10%, rgba(255, 183, 206, 0.12), transparent 62%);
+    animation: air-breathe 14s ease-in-out infinite alternate;
   }
 
-  @keyframes petal-fall {
-    to { transform: translateY(114vh); }
+  /* shared falling particles: petals, leaves, flakes */
+  #ambient-petals .p {
+    position: absolute;
+    top: 0;
+    left: var(--x, 50vw);
+    will-change: transform, opacity;
+    animation: drift-fall var(--fall, 14s) linear infinite;
+    animation-delay: var(--delay, 0s);
   }
-  @keyframes petal-sway {
-    from { transform: translateX(-16px) rotate(0deg); }
-    to { transform: translateX(16px) rotate(200deg); }
+  #ambient-petals .p > i {
+    display: block;
+    width: var(--w, 12px);
+    height: var(--h, 10px);
+    opacity: var(--o, 0.7);
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+  }
+  /* petal shape */
+  #ambient-petals .p.petal > i { border-radius: 100% 0 55% 50% / 55% 0 100% 50%; }
+  /* leaf shape */
+  #ambient-petals .p.leaf > i { border-radius: 0 100% 0 100% / 60% 40% 60% 40%; }
+  /* flake / dot */
+  #ambient-petals .p.flake > i { border-radius: 50%; filter: blur(0.4px); }
+
+  /* soft drifting smoke puffs */
+  #ambient-petals .smoke {
+    position: absolute;
+    left: var(--x, 50vw);
+    width: var(--w, 260px);
+    height: var(--w, 260px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, rgba(210, 214, 224, 0.55), rgba(210, 214, 224, 0) 68%);
+    filter: blur(22px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: smoke-rise var(--fall, 24s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* faint horizontal "air flow" streaks */
+  #ambient-petals .air {
+    position: absolute;
+    top: var(--y, 40vh);
+    left: -40vw;
+    width: 42vw;
+    height: var(--h, 3px);
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    filter: blur(6px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: air-flow var(--fall, 22s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes drift-fall {
+    0% { transform: translate(0, -12vh) rotate(0deg); }
+    25% { transform: translate(22px, 20vh) rotate(90deg); }
+    50% { transform: translate(-16px, 52vh) rotate(180deg); }
+    75% { transform: translate(20px, 82vh) rotate(270deg); }
+    100% { transform: translate(0, 116vh) rotate(360deg); }
+  }
+  @keyframes smoke-rise {
+    0% { transform: translate(0, 25vh) scale(0.55); opacity: 0; }
+    18% { opacity: var(--o, 0.12); }
+    82% { opacity: var(--o, 0.12); }
+    100% { transform: translate(48px, -32vh) scale(1.5); opacity: 0; }
+  }
+  @keyframes air-flow {
+    0% { transform: translate(0, 0); opacity: 0; }
+    14% { opacity: var(--o, 0.1); }
+    86% { opacity: var(--o, 0.1); }
+    100% { transform: translate(180vw, -22px); opacity: 0; }
+  }
+  @keyframes air-breathe {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
   }
 
   /* equalizer bars shown while playing */
@@ -83,8 +141,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   #ambient-toggle.is-on .ambient-bars { display: inline-flex; }
 
   @media (prefers-reduced-motion: reduce) {
-    #ambient-petals .petal,
-    #ambient-petals .petal > i,
+    #ambient-petals *,
     .ambient-bars i {
       animation: none !important;
     }
@@ -100,30 +157,64 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     if (!btn || !audio || !layer) return;
 
     const TARGET = 0.32;
-    const COLORS = ['#ffd9e6', '#fbb6ce', '#f9a8d4', '#ffe4ef', '#f7c8dc'];
     let on = false;
     let built = false;
     let fadeTimer = 0;
 
+    const rand = (min, max) => min + Math.random() * (max - min);
+
+    const PETAL_COLORS = ['#ffd9e6', '#fbb6ce', '#f9a8d4', '#ffe4ef', '#f7c8dc'];
+    const LEAF_COLORS = ['#c8a24a', '#a8b56a', '#d0894a', '#b7c27a', '#caa15a'];
+    const FLAKE_COLORS = ['#ffffff', '#fff2f7', '#f3f6ff'];
+
+    const makeFalling = (type, colors, wMin, wMax, ratio, fallMin, fallMax, oMin, oMax) => {
+      const el = document.createElement('div');
+      el.className = 'p ' + type;
+      el.style.setProperty('--x', rand(0, 100).toFixed(2) + 'vw');
+      el.style.setProperty('--fall', rand(fallMin, fallMax).toFixed(2) + 's');
+      el.style.setProperty('--delay', (-rand(0, fallMax)).toFixed(2) + 's');
+      const inner = document.createElement('i');
+      const w = rand(wMin, wMax);
+      inner.style.setProperty('--w', w.toFixed(1) + 'px');
+      inner.style.setProperty('--h', (w * ratio).toFixed(1) + 'px');
+      inner.style.setProperty('--o', rand(oMin, oMax).toFixed(2));
+      inner.style.background = colors[(Math.random() * colors.length) | 0];
+      el.appendChild(inner);
+      return el;
+    };
+
+    const makeSmoke = () => {
+      const el = document.createElement('div');
+      el.className = 'smoke';
+      el.style.setProperty('--x', rand(0, 100).toFixed(2) + 'vw');
+      el.style.setProperty('--w', rand(200, 380).toFixed(0) + 'px');
+      el.style.setProperty('--fall', rand(20, 34).toFixed(2) + 's');
+      el.style.setProperty('--delay', (-rand(0, 34)).toFixed(2) + 's');
+      el.style.setProperty('--o', rand(0.06, 0.14).toFixed(3));
+      return el;
+    };
+
+    const makeAir = () => {
+      const el = document.createElement('div');
+      el.className = 'air';
+      el.style.setProperty('--y', rand(8, 88).toFixed(1) + 'vh');
+      el.style.setProperty('--h', rand(2, 5).toFixed(1) + 'px');
+      el.style.setProperty('--fall', rand(16, 30).toFixed(2) + 's');
+      el.style.setProperty('--delay', (-rand(0, 30)).toFixed(2) + 's');
+      el.style.setProperty('--o', rand(0.05, 0.12).toFixed(3));
+      return el;
+    };
+
     const buildPetals = () => {
       if (built) return;
       built = true;
-      const N = 18;
-      for (let i = 0; i < N; i++) {
-        const p = document.createElement('div');
-        p.className = 'petal';
-        p.style.left = (Math.random() * 100).toFixed(2) + 'vw';
-        p.style.setProperty('--fall', (9 + Math.random() * 9).toFixed(2) + 's');
-        p.style.setProperty('--delay', (-Math.random() * 16).toFixed(2) + 's');
-        const inner = document.createElement('i');
-        const w = 8 + Math.random() * 9;
-        inner.style.width = w.toFixed(1) + 'px';
-        inner.style.height = (w * 0.8).toFixed(1) + 'px';
-        inner.style.background = COLORS[i % COLORS.length];
-        inner.style.setProperty('--sway', (3 + Math.random() * 3).toFixed(2) + 's');
-        p.appendChild(inner);
-        layer.appendChild(p);
-      }
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < 10; i++) frag.appendChild(makeFalling('petal', PETAL_COLORS, 8, 16, 0.8, 10, 18, 0.6, 0.85));
+      for (let i = 0; i < 6; i++) frag.appendChild(makeFalling('leaf', LEAF_COLORS, 12, 22, 0.62, 15, 26, 0.55, 0.8));
+      for (let i = 0; i < 12; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 3, 6, 1, 12, 22, 0.35, 0.65));
+      for (let i = 0; i < 4; i++) frag.appendChild(makeSmoke());
+      for (let i = 0; i < 3; i++) frag.appendChild(makeAir());
+      layer.appendChild(frag);
     };
 
     const fadeTo = (target) => {
