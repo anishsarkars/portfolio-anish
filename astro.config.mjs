@@ -17,11 +17,12 @@ const reactEntrypoints = [
 // each SSR reload briefly nulls React → "Invalid hook call" floods on dev start.
 // Pre-bundling them up front means one optimize pass, no reloads. Dev-only;
 // build/prod are unaffected.
+// NOTE: the @astrojs/markdoc/* entrypoints are intentionally NOT pre-bundled.
+// Their `runtime-assets-config` imports the `astro:assets` virtual module, which
+// esbuild's dep optimizer can't resolve on Windows ("Cannot read directory
+// astro:assets" / "The directory name is invalid"), breaking `astro dev`.
 const ssrPrebundle = [
   'astro/zod',
-  '@astrojs/markdoc/components',
-  '@astrojs/markdoc/runtime',
-  '@astrojs/markdoc/runtime-assets-config',
   '@fingerprintjs/fingerprintjs',
   '@upstash/redis',
 ];
