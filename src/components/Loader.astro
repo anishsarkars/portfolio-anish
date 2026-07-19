@@ -70,12 +70,6 @@
     const el = document.getElementById('site-loader');
     if (!el) return;
 
-    // Already shown this session — remove immediately, don't animate.
-    if (root.classList.contains('loader-done')) {
-      el.remove();
-      return;
-    }
-
     const wordEl = document.getElementById('loader-word');
     const countEl = document.getElementById('loader-count');
     const bar = document.getElementById('loader-bar');
@@ -98,7 +92,6 @@
 
     const finish = () => {
       window.clearInterval(rotate);
-      try { sessionStorage.setItem('loader-shown', '1'); } catch (e) {}
       window.setTimeout(() => {
         el.style.opacity = '0';
         root.classList.remove('loading');

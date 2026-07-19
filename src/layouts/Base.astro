@@ -71,14 +71,8 @@ const commandItems = [
       const t = localStorage.getItem('theme');
       const dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.classList.toggle('dark', dark);
-      // Intro loader: show once per session; otherwise skip it before paint.
-      try {
-        if (sessionStorage.getItem('loader-shown') === '1') {
-          document.documentElement.classList.add('loader-done');
-        } else {
-          document.documentElement.classList.add('loading');
-        }
-      } catch (e) {}
+      // Intro loader: shows on every page load (lock scroll before paint).
+      document.documentElement.classList.add('loading');
     </script>
     <script defer src="https://cdn.databuddy.cc/databuddy.js"></script>
   </head>

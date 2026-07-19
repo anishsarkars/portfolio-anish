@@ -241,11 +241,9 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     50% { transform: translateY(-5px); }
   }
 
+  /* Ambient mode is explicitly opt-in, so its particles animate even under
+     reduced-motion. Only the tiny auto-playing hint respects the preference. */
   @media (prefers-reduced-motion: reduce) {
-    #ambient-petals *,
-    #ambient-petals::before,
-    #ambient-petals::after,
-    .ambient-bars i,
     .hint-samurai {
       animation: none !important;
     }
@@ -266,8 +264,6 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     let built = false;
     let fadeTimer = 0;
     let animTimer = 0;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // ===== Canvas snowfall (Originkit) — coral-red drift while sound is on =====
     const SNOW = {
@@ -333,7 +329,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     };
 
     const snowStart = () => {
-      if (!canvas || reduceMotion) return;
+      if (!canvas) return;
       if (!snowReady) {
         sctx = canvas.getContext('2d');
         if (!sctx) return;
