@@ -4,23 +4,9 @@ import { HeroRole } from '../components/HeroRole';
 import { WorkExperience } from '../components/work-experience';
 import HomeProjects from '../components/HomeProjects.astro';
 import HeroSocials from '../components/HeroSocials.astro';
-import { HorizontalDepthFade } from '../components/unlumen-ui/horizontal-depth-fade';
 import { SpotlightReveal } from '../components/unlumen-ui/spotlight-reveal';
 import { profile } from '../data/profile';
 import { experience } from '../data/experience';
-
-// Replace these with your real visuals (drop images in `public/visual/` and use
-// e.g. `/visual/work-1.jpg`). Placeholders are used until then.
-const visualWork = [
-  { src: 'https://picsum.photos/seed/aniv1/720/920', alt: 'Work 01' },
-  { src: 'https://picsum.photos/seed/aniv2/720/920', alt: 'Work 02' },
-  { src: 'https://picsum.photos/seed/aniv3/720/920', alt: 'Work 03' },
-  { src: 'https://picsum.photos/seed/aniv4/720/920', alt: 'Work 04' },
-  { src: 'https://picsum.photos/seed/aniv5/720/920', alt: 'Work 05' },
-  { src: 'https://picsum.photos/seed/aniv6/720/920', alt: 'Work 06' },
-  { src: 'https://picsum.photos/seed/aniv7/720/920', alt: 'Work 07' },
-  { src: 'https://picsum.photos/seed/aniv8/720/920', alt: 'Work 08' },
-];
 
 const metaLabel = 'text-[11px] font-medium uppercase tracking-wider text-muted-foreground';
 const metaValue = 'mt-1.5 flex items-center gap-1.5 text-sm text-foreground/90';
@@ -139,18 +125,6 @@ const metaIcon = 'size-3.5 shrink-0 text-muted-foreground';
     </div>
     <HomeProjects />
   </section>
-
-  <section class="-mx-6 border-t border-border px-6 pt-10">
-    <h2 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Few visual work</h2>
-  </section>
-  <HorizontalDepthFade
-    client:only="react"
-    images={visualWork}
-    itemWidth={320}
-    itemHeight={420}
-    scrollLength={240}
-    className="-mx-6"
-  />
 
   <section class="-mx-6 border-t border-border">
     <SpotlightReveal
