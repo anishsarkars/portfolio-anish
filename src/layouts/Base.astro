@@ -5,6 +5,7 @@ import Loader from '../components/Loader.astro';
 import AmbientMode from '../components/AmbientMode.astro';
 import UserCursor from '../components/UserCursor.tsx';
 import Sparkles from '../components/Sparkles.tsx';
+import CurvedMarquee from '../components/CurvedMarquee.tsx';
 import CommandMenu from '../components/CommandMenu.tsx';
 import { FooterBrand } from '../components/name-brand';
 import { AutoTOCMinimap } from '../components/auto-toc-minimap';
@@ -95,6 +96,18 @@ const commandItems = [
       </nav>
       <slot />
       <footer class="-mx-6 mt-4 border-t border-border px-6 pt-3">
+        <div class="pointer-events-none relative left-1/2 z-40 h-[11vw] max-h-40 w-screen -translate-x-1/2 overflow-hidden text-foreground/55 [&>astro-island]:block [&>astro-island]:size-full">
+          <CurvedMarquee
+            client:visible
+            text="thanks"
+            baseVelocity={21}
+            gap={14}
+            fadePercent={12}
+            curveAmount={-30}
+            color="currentColor"
+            font={{ fontFamily: 'inherit', fontWeight: 600, fontSize: 60, letterSpacing: '1px', lineHeight: '1em' }}
+          />
+        </div>
         <div class="-mx-6 aspect-[22/3] overflow-hidden text-foreground [&>astro-island]:block [&>astro-island]:size-full">
           <FooterBrand client:visible />
         </div>
