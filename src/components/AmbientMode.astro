@@ -9,9 +9,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   id="ambient-petals"
   class="pointer-events-none fixed inset-0 z-[60] overflow-hidden opacity-0 transition-opacity duration-700"
   aria-hidden="true"
->
-  <canvas id="ambient-canvas" class="absolute inset-0 block h-full w-full"></canvas>
-</div>
+></div>
 
 <button
   id="ambient-toggle"
@@ -53,26 +51,14 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
 <audio id="ambient-audio" src={track} loop preload="none"></audio>
 
 <style>
-  /* theme-aware particle tints (visible on both light + dark) */
-  #ambient-petals {
-    --flake-col: rgba(90, 104, 130, 0.6);
-    --haze-col: rgba(228, 224, 228, 0.72);
-    --air-col: rgba(90, 104, 130, 0.55);
-  }
-  :global(html.dark) #ambient-petals {
-    --flake-col: rgba(255, 255, 255, 0.92);
-    --haze-col: rgba(232, 230, 234, 0.82);
-    --air-col: rgba(255, 255, 255, 0.9);
-  }
-
   /* subtle constant #F45555 red wash that keeps gently moving */
   #ambient-petals::before {
     content: '';
     position: absolute;
     inset: -6%;
     background:
-      radial-gradient(130% 75% at 50% 112%, rgba(244, 85, 85, 0.08), transparent 60%),
-      radial-gradient(120% 62% at 50% -12%, rgba(244, 85, 85, 0.06), transparent 64%);
+      radial-gradient(130% 75% at 50% 112%, rgba(244, 85, 85, 0.045), transparent 60%),
+      radial-gradient(120% 62% at 50% -12%, rgba(244, 85, 85, 0.035), transparent 64%);
     animation: air-breathe 14s ease-in-out infinite alternate,
       wash-move 18s ease-in-out infinite;
   }
@@ -90,90 +76,58 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     100% { transform: scale(1) translate3d(0, 0, 0); }
   }
   @keyframes vignette-pulse {
-    0%, 100% { box-shadow: inset 0 0 130px 30px rgba(244, 85, 85, 0.06); }
-    50% { box-shadow: inset 0 0 170px 48px rgba(244, 85, 85, 0.1); }
+    0%, 100% { box-shadow: inset 0 0 120px 26px rgba(244, 85, 85, 0.035); }
+    50% { box-shadow: inset 0 0 150px 40px rgba(244, 85, 85, 0.06); }
   }
 
-  /* shared drifting particles: petals, leaves, flakes — carried on a breeze */
-  #ambient-petals .p {
-    position: absolute;
-    top: 0;
-    left: var(--x, 50vw);
-    will-change: transform, opacity;
-    animation: breeze var(--fall, 16s) linear infinite;
-    animation-delay: var(--delay, 0s);
-  }
-  #ambient-petals .p > i {
-    display: block;
-    width: var(--w, 12px);
-    height: var(--h, 10px);
-    opacity: var(--o, 0.7);
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
-  }
-  /* petal shape */
-  #ambient-petals .p.petal > i { border-radius: 100% 0 55% 50% / 55% 0 100% 50%; }
-  /* leaf shape */
-  #ambient-petals .p.leaf > i { border-radius: 0 100% 0 100% / 60% 40% 60% 40%; }
-  /* flake / dot */
-  #ambient-petals .p.flake > i {
-    border-radius: 50%;
-    filter: blur(0.3px) drop-shadow(0 0 2px rgba(0, 0, 0, 0.12));
-  }
-
-  /* soft haze/smoke puffs carried across on the breeze */
-  #ambient-petals .smoke {
-    position: absolute;
-    left: var(--x, 50vw);
-    top: var(--y, 20vh);
-    width: var(--w, 260px);
-    height: var(--w, 260px);
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, var(--haze-col), transparent 68%);
-    filter: blur(22px);
-    opacity: 0;
-    will-change: transform, opacity;
-    animation: smoke-drift var(--fall, 26s) ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
-  }
-
-  /* faint horizontal "air flow" streaks */
-  #ambient-petals .air {
-    position: absolute;
-    top: var(--y, 40vh);
-    left: -40vw;
-    width: 42vw;
-    height: var(--h, 3px);
-    border-radius: 999px;
-    background: linear-gradient(90deg, transparent, var(--air-col), transparent);
-    filter: blur(6px);
-    opacity: 0;
-    will-change: transform, opacity;
-    animation: air-flow var(--fall, 22s) ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
-  }
-
-  @keyframes breeze {
-    0% { transform: translate3d(0, -14vh, 0) rotate(0deg); }
-    20% { transform: translate3d(calc(var(--dx, 30vw) * 0.2 + 3vw), 14vh, 0) rotate(70deg); }
-    45% { transform: translate3d(calc(var(--dx, 30vw) * 0.5 - 2vw), 42vh, 0) rotate(160deg); }
-    70% { transform: translate3d(calc(var(--dx, 30vw) * 0.75 + 2vw), 72vh, 0) rotate(255deg); }
-    100% { transform: translate3d(var(--dx, 30vw), 118vh, 0) rotate(360deg); }
-  }
-  @keyframes smoke-drift {
-    0% { transform: translate3d(-24vw, 6vh, 0) scale(0.65); opacity: 0; }
-    15% { opacity: var(--o, 0.16); }
-    85% { opacity: var(--o, 0.16); }
-    100% { transform: translate3d(64vw, -8vh, 0) scale(1.45); opacity: 0; }
-  }
-  @keyframes air-flow {
-    0% { transform: translate(0, 0); opacity: 0; }
-    14% { opacity: var(--o, 0.1); }
-    86% { opacity: var(--o, 0.1); }
-    100% { transform: translate(180vw, -22px); opacity: 0; }
-  }
   @keyframes air-breathe {
     from { opacity: 0.7; }
     to { opacity: 1; }
+  }
+
+  /* soft smoke puffs rising from the bottom to the top */
+  #ambient-petals .smoke {
+    position: absolute;
+    bottom: -18vh;
+    left: var(--x, 50vw);
+    width: var(--w, 300px);
+    height: var(--w, 300px);
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--smoke-col, rgba(244, 85, 85, 0.16)), transparent 68%);
+    filter: blur(26px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: smoke-rise var(--dur, 26s) ease-in infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* faint vertical air streaks drifting upward */
+  #ambient-petals .air {
+    position: absolute;
+    bottom: -12vh;
+    left: var(--x, 50vw);
+    width: var(--w, 3px);
+    height: var(--h, 22vh);
+    border-radius: 999px;
+    background: linear-gradient(0deg, transparent, var(--air-col, rgba(244, 85, 85, 0.35)), transparent);
+    filter: blur(3px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: air-rise var(--dur, 18s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes smoke-rise {
+    0% { transform: translate3d(0, 0, 0) scale(0.7); opacity: 0; }
+    18% { opacity: var(--o, 0.16); }
+    82% { opacity: var(--o, 0.16); }
+    100% { transform: translate3d(var(--dx, 4vw), -130vh, 0) scale(1.5); opacity: 0; }
+  }
+  @keyframes air-rise {
+    0% { transform: translate3d(0, 0, 0); opacity: 0; }
+    16% { opacity: var(--o, 0.35); }
+    84% { opacity: var(--o, 0.35); }
+    100% { transform: translate3d(var(--dx, 3vw), -128vh, 0); opacity: 0; }
   }
 
   /* equalizer bars shown while playing */
@@ -193,6 +147,10 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     0%, 100% { transform: scaleY(0.35); }
     50% { transform: scaleY(1); }
   }
+
+  /* full-page stardust only shows while ambient mode is on */
+  :global(#sparkles-layer) { opacity: 0; }
+  :global(html.jp #sparkles-layer) { opacity: 1; }
 
   #ambient-toggle.is-on { color: var(--foreground); }
   #ambient-toggle.is-on .ambient-icon { display: none; }
@@ -264,145 +222,38 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     let fadeTimer = 0;
     let animTimer = 0;
 
-    // ===== Canvas snowfall (Originkit) — coral-red drift while sound is on =====
-    const SNOW = {
-      count: 130, sMin: 0.5, sMax: 0.7, sizeMin: 1, sizeMax: 3,
-      oMin: 0.18, oMax: 0.45, wind: 0, windVar: 0.7, color: '#f45555',
-    };
-    const canvas = document.getElementById('ambient-canvas');
-    let sctx = null;
-    let snowRaf = 0;
-    let snowReady = false;
-    let snowRO = null;
-    let SW = 0;
-    let SH = 0;
-    let flakes = [];
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const rnd = (a, b) => a + Math.random() * (b - a);
-
-    const snowBuild = () => {
-      const rect = canvas.getBoundingClientRect();
-      SW = Math.max(1, Math.floor(rect.width || window.innerWidth));
-      SH = Math.max(1, Math.floor(rect.height || window.innerHeight));
-      canvas.width = Math.floor(SW * dpr);
-      canvas.height = Math.floor(SH * dpr);
-      canvas.style.width = SW + 'px';
-      canvas.style.height = SH + 'px';
-      sctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = SNOW.count;
-      flakes = new Array(n);
-      for (let i = 0; i < n; i++) {
-        flakes[i] = {
-          x: Math.random() * SW, y: Math.random() * SH,
-          r: rnd(SNOW.sizeMin, SNOW.sizeMax), vy: rnd(SNOW.sMin, SNOW.sMax),
-          vx: rnd(-1, 1), phase: Math.random() * Math.PI * 2,
-          sway: rnd(0.2, 0.9), alpha: rnd(SNOW.oMin, SNOW.oMax),
-        };
-      }
-    };
-
-    const snowDraw = () => {
-      sctx.clearRect(0, 0, SW, SH);
-      sctx.fillStyle = SNOW.color;
-      for (let i = 0; i < flakes.length; i++) {
-        const f = flakes[i];
-        sctx.globalAlpha = f.alpha;
-        sctx.beginPath();
-        sctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
-        sctx.fill();
-      }
-      sctx.globalAlpha = 1;
-    };
-
-    const snowLoop = (t) => {
-      for (let i = 0; i < flakes.length; i++) {
-        const f = flakes[i];
-        f.y += f.vy;
-        f.x += SNOW.wind + f.vx * SNOW.windVar + Math.sin(t * 0.0012 + f.phase) * f.sway;
-        if (f.y - f.r > SH) { f.y = -f.r; f.x = Math.random() * SW; }
-        if (f.x < -f.r) f.x = SW + f.r;
-        else if (f.x > SW + f.r) f.x = -f.r;
-      }
-      snowDraw();
-      snowRaf = requestAnimationFrame(snowLoop);
-    };
-
-    const snowStart = () => {
-      if (!canvas) return;
-      if (!snowReady) {
-        sctx = canvas.getContext('2d');
-        if (!sctx) return;
-        snowBuild();
-        snowReady = true;
-        snowRO = new ResizeObserver(() => { snowBuild(); snowDraw(); });
-        snowRO.observe(canvas);
-      }
-      if (!snowRaf) snowRaf = requestAnimationFrame(snowLoop);
-    };
-
-    const snowStop = () => {
-      if (snowRaf) { cancelAnimationFrame(snowRaf); snowRaf = 0; }
-    };
-
     const rand = (min, max) => min + Math.random() * (max - min);
 
-    // crimson / sakura mix to match the cinematic reference
-    const PETAL_COLORS = ['#e0566b', '#d24f61', '#e97d8f', '#c9455a', '#f2a8b6', '#db6076', '#fbb6ce'];
-    const LEAF_COLORS = ['#c8a24a', '#a8b56a', '#d0894a', '#b7c27a', '#caa15a'];
-    const FLAKE_COLORS = ['var(--flake-col)'];
-
-    const makeFalling = (type, colors, wMin, wMax, ratio, fallMin, fallMax, oMin, oMax) => {
-      const el = document.createElement('div');
-      el.className = 'p ' + type;
-      el.style.setProperty('--x', rand(-5, 95).toFixed(2) + 'vw');
-      // horizontal breeze drift: mostly rightward, occasional turbulence left
-      const dx = rand(10, 55) * (Math.random() < 0.18 ? -0.5 : 1);
-      el.style.setProperty('--dx', dx.toFixed(1) + 'vw');
-      el.style.setProperty('--fall', rand(fallMin, fallMax).toFixed(2) + 's');
-      el.style.setProperty('--delay', (-rand(0, fallMax)).toFixed(2) + 's');
-      const inner = document.createElement('i');
-      const w = rand(wMin, wMax);
-      inner.style.setProperty('--w', w.toFixed(1) + 'px');
-      inner.style.setProperty('--h', (w * ratio).toFixed(1) + 'px');
-      inner.style.setProperty('--o', rand(oMin, oMax).toFixed(2));
-      inner.style.background = colors[(Math.random() * colors.length) | 0];
-      el.appendChild(inner);
-      return el;
-    };
-
-    const makeSmoke = (lowBias) => {
+    const makeSmoke = () => {
       const el = document.createElement('div');
       el.className = 'smoke';
-      el.style.setProperty('--x', rand(-5, 85).toFixed(2) + 'vw');
-      // billowing clouds sit lower on the screen; some drift higher
-      el.style.setProperty('--y', (lowBias ? rand(46, 92) : rand(6, 70)).toFixed(1) + 'vh');
-      el.style.setProperty('--w', (lowBias ? rand(420, 680) : rand(280, 480)).toFixed(0) + 'px');
-      el.style.setProperty('--fall', rand(26, 44).toFixed(2) + 's');
-      el.style.setProperty('--delay', (-rand(0, 44)).toFixed(2) + 's');
-      el.style.setProperty('--o', (lowBias ? rand(0.1, 0.2) : rand(0.06, 0.13)).toFixed(3));
+      el.style.setProperty('--x', rand(-5, 95).toFixed(1) + 'vw');
+      el.style.setProperty('--w', rand(240, 460).toFixed(0) + 'px');
+      el.style.setProperty('--dx', rand(-8, 8).toFixed(1) + 'vw');
+      el.style.setProperty('--dur', rand(24, 42).toFixed(1) + 's');
+      el.style.setProperty('--delay', (-rand(0, 42)).toFixed(1) + 's');
+      el.style.setProperty('--o', rand(0.05, 0.1).toFixed(3));
       return el;
     };
 
     const makeAir = () => {
       const el = document.createElement('div');
       el.className = 'air';
-      el.style.setProperty('--y', rand(6, 90).toFixed(1) + 'vh');
-      el.style.setProperty('--h', rand(2, 6).toFixed(1) + 'px');
-      el.style.setProperty('--fall', rand(14, 26).toFixed(2) + 's');
-      el.style.setProperty('--delay', (-rand(0, 26)).toFixed(2) + 's');
+      el.style.setProperty('--x', rand(0, 100).toFixed(1) + 'vw');
+      el.style.setProperty('--w', rand(2, 5).toFixed(1) + 'px');
+      el.style.setProperty('--h', rand(16, 32).toFixed(0) + 'vh');
+      el.style.setProperty('--dx', rand(-5, 5).toFixed(1) + 'vw');
+      el.style.setProperty('--dur', rand(14, 26).toFixed(1) + 's');
+      el.style.setProperty('--delay', (-rand(0, 26)).toFixed(1) + 's');
       el.style.setProperty('--o', rand(0.06, 0.14).toFixed(3));
       return el;
     };
 
-    const buildPetals = () => {
+    const buildParticles = () => {
       if (built) return;
       built = true;
       const frag = document.createDocumentFragment();
-      for (let i = 0; i < 12; i++) frag.appendChild(makeFalling('petal', PETAL_COLORS, 8, 16, 0.8, 12, 24, 0.4, 0.62));
-      for (let i = 0; i < 4; i++) frag.appendChild(makeFalling('leaf', LEAF_COLORS, 12, 20, 0.62, 18, 32, 0.38, 0.58));
-      for (let i = 0; i < 8; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 3, 7, 1, 16, 28, 0.3, 0.55));
-      for (let i = 0; i < 2; i++) frag.appendChild(makeSmoke(true));
-      for (let i = 0; i < 2; i++) frag.appendChild(makeSmoke(false));
+      for (let i = 0; i < 2; i++) frag.appendChild(makeSmoke());
       for (let i = 0; i < 2; i++) frag.appendChild(makeAir());
       layer.appendChild(frag);
     };
@@ -443,11 +294,9 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       animTimer = window.setTimeout(() => root.classList.remove('jp-anim'), 700);
       localStorage.setItem(KEY, on ? '1' : '0');
       if (on) {
-        buildPetals();
-        snowStart();
+        buildParticles();
         if (withAudio) tryPlay();
       } else {
-        snowStop();
         fadeTo(0);
       }
     };

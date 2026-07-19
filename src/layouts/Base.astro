@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Loader from '../components/Loader.astro';
 import AmbientMode from '../components/AmbientMode.astro';
 import UserCursor from '../components/UserCursor.tsx';
+import Sparkles from '../components/Sparkles.tsx';
 import CommandMenu from '../components/CommandMenu.tsx';
 import { FooterBrand } from '../components/name-brand';
 import { AutoTOCMinimap } from '../components/auto-toc-minimap';
@@ -78,10 +79,13 @@ const commandItems = [
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <Loader />
+    <div id="sparkles-layer" class="pointer-events-none fixed inset-0 z-0 opacity-0 transition-opacity duration-700" aria-hidden="true">
+      <Sparkles client:idle densityScale={0.18} particleColor="rgba(255, 203, 203, 0.4)" />
+    </div>
     <!-- Grid system: the content lives on a centered "sheet" framed by vertical
          hairlines; full-bleed horizontal hairlines divide it at real section
          boundaries. Same frame on every page. -->
-    <main class="mx-auto min-h-dvh max-w-2xl border-x border-border px-6">
+    <main class="relative z-10 mx-auto min-h-dvh max-w-2xl border-x border-border px-6">
       <Nav />
       <div class="-mx-6 border-b border-border" aria-hidden="true"></div>
       <nav aria-label="On this page" class="fixed top-1/2 right-6 z-40 hidden -translate-y-1/2 xl:block">
