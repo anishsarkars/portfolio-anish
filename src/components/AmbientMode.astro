@@ -51,6 +51,18 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
 <audio id="ambient-audio" src={track} loop preload="none"></audio>
 
 <style>
+  /* theme-aware particle tints (visible on both light + dark) */
+  #ambient-petals {
+    --flake-col: rgba(90, 104, 130, 0.6);
+    --haze-col: rgba(110, 118, 136, 0.5);
+    --air-col: rgba(90, 104, 130, 0.55);
+  }
+  :global(html.dark) #ambient-petals {
+    --flake-col: rgba(255, 255, 255, 0.92);
+    --haze-col: rgba(214, 218, 228, 0.8);
+    --air-col: rgba(255, 255, 255, 0.9);
+  }
+
   #ambient-petals::before {
     content: '';
     position: absolute;
@@ -80,7 +92,10 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
   /* leaf shape */
   #ambient-petals .p.leaf > i { border-radius: 0 100% 0 100% / 60% 40% 60% 40%; }
   /* flake / dot */
-  #ambient-petals .p.flake > i { border-radius: 50%; filter: blur(0.4px); }
+  #ambient-petals .p.flake > i {
+    border-radius: 50%;
+    filter: blur(0.3px) drop-shadow(0 0 2px rgba(0, 0, 0, 0.12));
+  }
 
   /* soft haze/smoke puffs carried across on the breeze */
   #ambient-petals .smoke {
@@ -90,7 +105,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     width: var(--w, 260px);
     height: var(--w, 260px);
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, rgba(210, 214, 224, 0.7), rgba(210, 214, 224, 0) 68%);
+    background: radial-gradient(circle at 50% 50%, var(--haze-col), transparent 68%);
     filter: blur(22px);
     opacity: 0;
     will-change: transform, opacity;
@@ -106,7 +121,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
     width: 42vw;
     height: var(--h, 3px);
     border-radius: 999px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, var(--air-col), transparent);
     filter: blur(6px);
     opacity: 0;
     will-change: transform, opacity;
@@ -230,7 +245,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
 
     const PETAL_COLORS = ['#ffd9e6', '#fbb6ce', '#f9a8d4', '#ffe4ef', '#f7c8dc'];
     const LEAF_COLORS = ['#c8a24a', '#a8b56a', '#d0894a', '#b7c27a', '#caa15a'];
-    const FLAKE_COLORS = ['#ffffff', '#fff2f7', '#f3f6ff'];
+    const FLAKE_COLORS = ['var(--flake-col)'];
 
     const makeFalling = (type, colors, wMin, wMax, ratio, fallMin, fallMax, oMin, oMax) => {
       const el = document.createElement('div');
@@ -259,7 +274,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       el.style.setProperty('--w', rand(220, 420).toFixed(0) + 'px');
       el.style.setProperty('--fall', rand(22, 38).toFixed(2) + 's');
       el.style.setProperty('--delay', (-rand(0, 38)).toFixed(2) + 's');
-      el.style.setProperty('--o', rand(0.1, 0.22).toFixed(3));
+      el.style.setProperty('--o', rand(0.18, 0.36).toFixed(3));
       return el;
     };
 
@@ -270,7 +285,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       el.style.setProperty('--h', rand(2, 6).toFixed(1) + 'px');
       el.style.setProperty('--fall', rand(14, 26).toFixed(2) + 's');
       el.style.setProperty('--delay', (-rand(0, 26)).toFixed(2) + 's');
-      el.style.setProperty('--o', rand(0.08, 0.18).toFixed(3));
+      el.style.setProperty('--o', rand(0.16, 0.32).toFixed(3));
       return el;
     };
 
@@ -280,7 +295,7 @@ const track = '/music/hitslab-japan-japanese-music-502006.mp3';
       const frag = document.createDocumentFragment();
       for (let i = 0; i < 16; i++) frag.appendChild(makeFalling('petal', PETAL_COLORS, 9, 18, 0.8, 12, 22, 0.7, 0.95));
       for (let i = 0; i < 10; i++) frag.appendChild(makeFalling('leaf', LEAF_COLORS, 13, 24, 0.62, 16, 30, 0.65, 0.9));
-      for (let i = 0; i < 20; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 3, 7, 1, 14, 26, 0.45, 0.8));
+      for (let i = 0; i < 22; i++) frag.appendChild(makeFalling('flake', FLAKE_COLORS, 4, 9, 1, 14, 26, 0.6, 0.95));
       for (let i = 0; i < 5; i++) frag.appendChild(makeSmoke());
       for (let i = 0; i < 4; i++) frag.appendChild(makeAir());
       layer.appendChild(frag);
