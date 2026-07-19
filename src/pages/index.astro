@@ -4,8 +4,22 @@ import { HeroRole } from '../components/HeroRole';
 import { WorkExperience } from '../components/work-experience';
 import HomeProjects from '../components/HomeProjects.astro';
 import HeroSocials from '../components/HeroSocials.astro';
+import { OrbitalImageWheel } from '../components/unlumen-ui/orbital-image-wheel';
 import { profile } from '../data/profile';
 import { experience } from '../data/experience';
+
+// Replace these with your real visuals (drop images in `public/visual/` and use
+// e.g. `/visual/work-1.jpg`). Placeholders are used until then.
+const visualWork = [
+  { src: 'https://picsum.photos/seed/aniv1/440/600', label: 'Work 01', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv2/440/600', label: 'Work 02', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv3/440/600', label: 'Work 03', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv4/440/600', label: 'Work 04', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv5/440/600', label: 'Work 05', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv6/440/600', label: 'Work 06', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv7/440/600', label: 'Work 07', subtitle: 'Selected visual work' },
+  { src: 'https://picsum.photos/seed/aniv8/440/600', label: 'Work 08', subtitle: 'Selected visual work' },
+];
 
 const metaLabel = 'text-[11px] font-medium uppercase tracking-wider text-muted-foreground';
 const metaValue = 'mt-1.5 flex items-center gap-1.5 text-sm text-foreground/90';
@@ -124,4 +138,17 @@ const metaIcon = 'size-3.5 shrink-0 text-muted-foreground';
     </div>
     <HomeProjects />
   </section>
+
+  <section class="-mx-6 border-t border-border px-6 pt-10">
+    <h2 class="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Few visual work</h2>
+  </section>
+  <OrbitalImageWheel
+    client:only="react"
+    images={visualWork}
+    turns={3}
+    scrollLength={240}
+    itemWidth={200}
+    itemHeight={270}
+    className="-mx-6"
+  />
 </Base>
