@@ -47,6 +47,9 @@ importers:
       '@upstash/redis':
         specifier: ^1.38.0
         version: 1.38.0
+      '@vercel/analytics':
+        specifier: ^1.4.1
+        version: 1.6.1(react@19.2.7)
       astro:
         specifier: ^6.0.0
         version: 6.4.8(@types/node@26.0.1)(@upstash/redis@1.38.0)(@vercel/functions@3.7.5(ws@8.21.0))(idb-keyval@6.2.5)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.2)(yaml@2.9.0)
