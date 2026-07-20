@@ -43,7 +43,9 @@ function dedupeReactInSSR() {
 export default defineConfig({
   site: 'https://aniish.me',
   prefetch: { prefetchAll: true },
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   session: { driver: sessionDrivers.lruCache() },
   integrations: [react(), markdoc(), keystatic(), sitemap()],
   vite: {

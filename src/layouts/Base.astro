@@ -11,6 +11,7 @@ import { FooterBrand } from '../components/name-brand';
 import { AutoTOCMinimap } from '../components/auto-toc-minimap';
 import { profile } from '../data/profile';
 import { projects } from '../data/projects';
+import Analytics from '@vercel/analytics/astro';
 // `toc` selects which headings become scroll-minimap ticks (section h2s by default).
 // `image` is the social card; pages (e.g. blog posts) can pass their own.
 const {
@@ -116,5 +117,6 @@ const commandItems = [
     <CommandMenu client:idle items={commandItems} />
     <AmbientMode />
     <UserCursor client:load name="hi" size={31} />
+    <Analytics />
   </body>
 </html>
