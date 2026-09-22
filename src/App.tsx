@@ -239,7 +239,7 @@ function LandingPage() {
       .then(data => {
         if (data.country_code === 'IN') {
           setPrice('₹299');
-          setCheckoutUrl('https://checkout.dodopayments.com/buy/ADD_YOUR_INR_PRODUCT_ID_HERE');
+          setCheckoutUrl('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
         }
       })
       .catch(err => console.error('Geolocation failed:', err));
@@ -337,7 +337,6 @@ function LandingPage() {
               className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
             >
               Get Mino for Mac
-              <ArrowRight className="w-4 h-4 ml-1" />
             </a>
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
