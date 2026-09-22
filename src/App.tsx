@@ -231,10 +231,10 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#e6e9fc] via-[#f4f7fb] to-white relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-[#ebf0fe] via-[#f6f9ff] to-white relative overflow-hidden font-sans">
       
       {/* Soft radial glow to match the image precisely */}
-      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80%] h-[500px] bg-gradient-to-b from-[#ccd6f6] to-transparent blur-[100px] rounded-full pointer-events-none opacity-50"></div>
+      <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[90%] h-[600px] bg-gradient-to-b from-[#d5dffa] to-transparent blur-[120px] rounded-full pointer-events-none opacity-60"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
 
@@ -315,7 +315,8 @@ export default function App() {
             className="animate-fade-in-up mb-16"
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
-            <button className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
+            <button className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2">
+              <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
               Download for macOS
             </button>
           </div>
