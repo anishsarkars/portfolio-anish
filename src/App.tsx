@@ -1,23 +1,16 @@
-import { useState, useEffect, type ComponentType } from 'react';
+import { useState } from 'react';
 import {
-  ChevronDown,
   Star,
   Check,
   Settings,
-  Plus,
   Zap,
   Target,
   CheckCircle2,
-  ListTodo,
   AlarmClock,
   Layers,
   ArrowRight,
   Shield,
-  Inbox,
   Keyboard,
-  Moon,
-  Globe,
-  X,
   Mail,
   Heart,
 } from 'lucide-react';
@@ -42,8 +35,7 @@ const GithubIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-type TabId = 'capture' | 'organise' | 'focus' | 'done';
+
 
 // ─── Mino Logo ────────────────────────────────────────────────────────────────
 const MinoLogo = () => (
