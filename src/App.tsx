@@ -231,7 +231,7 @@ const CompanyLogos = () => (
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [price, setPrice] = useState('$4.99');
-  const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/ADD_YOUR_USD_PRODUCT_ID_HERE');
+  const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
