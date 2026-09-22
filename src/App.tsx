@@ -315,10 +315,15 @@ export default function App() {
             className="animate-fade-in-up mb-16"
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
-            <button className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2">
+            <a 
+              href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
+            >
               <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
               Download for macOS
-            </button>
+            </a>
           </div>
 
           {/* ── HIGH QUALITY HERO IMAGE ────────────────────────────────────────────────────────── */}
@@ -568,10 +573,15 @@ export default function App() {
                 ))}
               </ul>
 
-              <button className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2">
+              <a 
+                href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
+              >
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
                 Download App
-              </button>
+              </a>
               <p className="text-center text-white/30 text-xs mt-3">14-day money-back guarantee</p>
             </div>
           </div>
@@ -598,10 +608,15 @@ export default function App() {
             <p className="text-lg text-gray-500 mb-8 max-w-md mx-auto">
               Join 18,000+ people who&apos;ve made Mino their daily task companion.
             </p>
-            <button className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10">
+            <a 
+              href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
+            >
               <AppleLogo className="w-4 h-4" fill="currentColor" />
               Download for macOS
-            </button>
+            </a>
             <p className="text-xs text-gray-400 mt-3">macOS 13 Ventura or later · No account required</p>
           </div>
 
