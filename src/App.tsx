@@ -298,15 +298,15 @@ export default function App() {
           >
             <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-sm border border-gray-200/50 rounded-full px-3 py-1 mb-8">
               <span className="text-[10px] font-bold text-[#1c1e26] uppercase tracking-wider">NEW</span>
-              <span className="text-[11px] text-[#5e6a82] font-medium">A calmer way to get things done</span>
+              <span className="text-[11px] text-[#5e6a82] font-medium">Mino Tasks</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-[84px] font-serif text-[#1b1d28] mb-6 leading-[1.1] max-w-4xl mx-auto tracking-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
-              Little tasks. Done.
+            <h1 className="text-5xl md:text-6xl lg:text-[72px] font-serif text-[#1b1d28] mb-6 leading-[1.1] max-w-4xl mx-auto tracking-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+              Your tasks.<br/>Right in your menu bar.
             </h1>
             
             <p className="text-base md:text-[19px] text-[#5e6a82] max-w-2xl mx-auto leading-relaxed">
-              Keep your todos one click away in the menu bar. Simple, fast, and always there when you need it.
+              A tiny, beautiful way to capture what&apos;s next, stay focused, and get things done.
             </p>
           </div>
 
