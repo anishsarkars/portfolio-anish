@@ -231,70 +231,60 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#eef4fd] via-[#f7fafd] to-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#e6e9fc] via-[#f4f7fb] to-white relative overflow-hidden font-sans">
       
       {/* Soft radial glow to match the image precisely */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#e3edfe] blur-[100px] rounded-full pointer-events-none opacity-60"></div>
-      <div className="absolute top-[10%] right-[-10%] w-[40%] h-[40%] bg-[#e3edfe] blur-[120px] rounded-full pointer-events-none opacity-60"></div>
+      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[80%] h-[500px] bg-gradient-to-b from-[#ccd6f6] to-transparent blur-[100px] rounded-full pointer-events-none opacity-50"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* ── NAVIGATION ─────────────────────────────────────────────────────── */}
-        <nav
-          className="animate-fade-in-up px-6 py-6 flex items-center justify-between"
-          style={{ animationDelay: '0.1s', opacity: 0 }}
-        >
-          {/* Left: Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-[42px] h-[42px] bg-white rounded-[14px] shadow-[0_2px_12px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center justify-center overflow-hidden p-1">
-              <img src="/mascot-transparent.png" alt="Mino Logo" className="w-full h-full object-contain" />
-            </div>
-            <span className="text-[22px] font-bold text-[#1a202c] tracking-tight">Mino</span>
-          </div>
-
-          {/* Center: Links (desktop) */}
-          <div className="hidden md:flex items-center gap-10">
-            {['Features', 'Gallery', 'FAQ', 'Pricing'].map((label) => (
-              <a
-                key={label}
-                href={`#${label.toLowerCase()}`}
-                className="text-sm font-medium text-[#7a8b9f] hover:text-[#1a202c] transition-colors"
-              >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* Right: Download CTA */}
-          <div className="hidden md:block">
-            <button className="bg-[#0f172a] text-white px-6 py-[10px] rounded-full text-[14px] font-semibold hover:bg-black transition-colors flex items-center gap-2 shadow-sm">
-              <AppleLogo className="w-4 h-4" fill="currentColor" />
-              Download
-            </button>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2 text-gray-700"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        <div className="flex justify-center pt-8">
+          <nav
+            className="animate-fade-in-up bg-white/40 backdrop-blur-md border border-white/40 shadow-sm rounded-full px-6 py-2.5 flex items-center gap-8 relative z-50"
+            style={{ animationDelay: '0.1s', opacity: 0 }}
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              {mobileMenuOpen
-                ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
-            </svg>
-          </button>
-        </nav>
+            {/* Left: Logo */}
+            <div className="flex items-center gap-2.5 cursor-pointer">
+              <div className="w-7 h-7 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden p-0.5">
+                <img src="/mascot-transparent.png" alt="Mino Logo" className="w-full h-full object-contain" />
+              </div>
+              <span className="text-[15px] font-semibold text-[#1c1e26] tracking-tight">Mino</span>
+            </div>
+
+            {/* Links (desktop) */}
+            <div className="hidden md:flex items-center gap-6">
+              {['Features', 'Pricing', 'Blog', 'Contact'].map((label) => (
+                <a
+                  key={label}
+                  href={`#${label.toLowerCase()}`}
+                  className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+            
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden p-1 text-[#5e6a82]"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                {mobileMenuOpen
+                  ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
+              </svg>
+            </button>
+          </nav>
+        </div>
 
         {/* Mobile nav drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden px-6 pb-4 border-b border-gray-100 space-y-3">
-            {['Features', 'Gallery', 'FAQ', 'Pricing'].map((l) => (
-              <a key={l} href="#" className="block text-sm font-medium text-[#7a8b9f]">{l}</a>
+          <div className="md:hidden absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/50 p-6 space-y-4 z-50 animate-fade-in-up">
+            {['Features', 'Pricing', 'Blog', 'Contact'].map((l) => (
+              <a key={l} href="#" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]">{l}</a>
             ))}
-            <button className="w-full bg-[#0f172a] text-white px-5 py-2.5 rounded-full text-sm font-semibold flex items-center justify-center gap-2">
-              <AppleLogo className="w-4 h-4" fill="currentColor" /> Download
-            </button>
           </div>
         )}
 
@@ -303,33 +293,31 @@ export default function App() {
 
           {/* Main heading */}
           <div
-            className="animate-fade-in-up text-center mb-8"
+            className="animate-fade-in-up text-center mb-10"
             style={{ animationDelay: '0.2s', opacity: 0 }}
           >
-            <p className="text-[11px] font-bold text-[#8ba3b8] tracking-[0.25em] uppercase mb-5">
-              A calmer way to get things done
-            </p>
-            <h1 className="text-7xl md:text-8xl lg:text-[130px] font-black tracking-tight mb-6 text-[#202938]">
-              Mino
-            </h1>
-            <p className="text-2xl md:text-[32px] font-medium text-[#8ba3b8] mb-6 font-serif italic">
+            <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-sm border border-gray-200/50 rounded-full px-3 py-1 mb-8">
+              <span className="text-[10px] font-bold text-[#1c1e26] uppercase tracking-wider">NEW</span>
+              <span className="text-[11px] text-[#5e6a82] font-medium">A calmer way to get things done</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-[84px] font-serif text-[#1b1d28] mb-6 leading-[1.1] max-w-4xl mx-auto tracking-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
               Little tasks. Done.
-            </p>
-            <p className="text-lg md:text-xl text-[#4a5568] max-w-xl mx-auto leading-relaxed">
+            </h1>
+            
+            <p className="text-base md:text-[19px] text-[#5e6a82] max-w-2xl mx-auto leading-relaxed">
               Keep your todos one click away in the menu bar. Simple, fast, and always there when you need it.
             </p>
           </div>
 
           {/* CTA button */}
           <div
-            className="animate-fade-in-up mb-20"
+            className="animate-fade-in-up mb-16"
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
-            <button className="bg-black text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2 shadow-xl shadow-black/10">
-              <AppleLogo className="w-5 h-5" fill="currentColor" />
+            <button className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)]">
               Download for macOS
             </button>
-            <p className="text-xs text-gray-400 mt-4 font-medium">macOS 13+ · Lightweight · Free to try</p>
           </div>
 
           {/* ── HIGH QUALITY HERO IMAGE ────────────────────────────────────────────────────────── */}
