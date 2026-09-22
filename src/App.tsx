@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Star,
   Check,
@@ -229,6 +229,20 @@ const CompanyLogos = () => (
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [price, setPrice] = useState('$4.99');
+  const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/ADD_YOUR_USD_PRODUCT_ID_HERE');
+
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code === 'IN') {
+          setPrice('₹299');
+          setCheckoutUrl('https://checkout.dodopayments.com/buy/ADD_YOUR_INR_PRODUCT_ID_HERE');
+        }
+      })
+      .catch(err => console.error('Geolocation failed:', err));
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#ebf0fe] via-[#f6f9ff] to-white relative overflow-hidden font-sans">
@@ -316,7 +330,7 @@ export default function App() {
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
             <a 
-              href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+              href={checkoutUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
@@ -547,7 +561,7 @@ export default function App() {
               <div className="mb-6 text-left">
                 <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Pro</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-white">$4</span>
+                  <span className="text-5xl font-bold text-white">{price}</span>
                 </div>
                 <p className="text-sm text-white/50 mt-2">One-time payment. Full peace of mind.</p>
               </div>
@@ -574,7 +588,7 @@ export default function App() {
               </ul>
 
               <a 
-                href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+                href={checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
@@ -609,7 +623,7 @@ export default function App() {
               Join 18,000+ people who&apos;ve made Mino their daily task companion.
             </p>
             <a 
-              href="https://checkout.dodopayments.com/buy/ADD_YOUR_PRODUCT_ID_HERE"
+              href={checkoutUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
