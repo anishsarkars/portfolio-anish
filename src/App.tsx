@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import {
   Star,
   Check,
@@ -226,8 +227,8 @@ const CompanyLogos = () => (
   </div>
 );
 
-// ─── Main App ─────────────────────────────────────────────────────────────────
-export default function App() {
+// ─── Landing Page ─────────────────────────────────────────────────────────────────
+function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [price, setPrice] = useState('$4.99');
   const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/ADD_YOUR_USD_PRODUCT_ID_HERE');
@@ -713,3 +714,78 @@ export default function App() {
     </div>
   );
 }
+
+// ─── Success Page ─────────────────────────────────────────────────────────────
+function SuccessPage() {
+  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+
+  useEffect(() => {
+    const handleResize = () => setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener('resize', handleResize);
+    
+    // Auto-trigger download
+    const downloadTimer = setTimeout(() => {
+      // NOTE: Replace this with the actual DMG URL if you want auto-download directly,
+      // OR let the user rely on the email sent by Dodo Payments.
+      const dmgUrl = "https://replace-with-actual-dmg-url.com/Mino.dmg";
+      
+      const link = document.createElement('a');
+      link.href = dmgUrl;
+      link.download = "Mino.dmg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(downloadTimer);
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#ebf0fe] via-[#f6f9ff] to-white flex flex-col items-center justify-center font-sans text-center relative overflow-hidden">
+      <Confetti width={windowSize.width} height={windowSize.height} recycle={false} numberOfPieces={500} />
+      
+      <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[90%] h-[600px] bg-gradient-to-b from-[#d5dffa] to-transparent blur-[120px] rounded-full pointer-events-none opacity-60"></div>
+      
+      <div className="relative z-10 animate-fade-in-up bg-white/40 backdrop-blur-xl border border-white/50 shadow-2xl shadow-blue-900/5 rounded-3xl p-12 max-w-lg mx-4">
+        <div className="w-20 h-20 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden p-2 mx-auto mb-8">
+          <img src="/mascot-transparent.png" alt="Mino Logo" className="w-full h-full object-contain" />
+        </div>
+        
+        <h1 className="text-4xl md:text-5xl font-serif text-[#1b1d28] mb-4 tracking-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
+          Thank you!
+        </h1>
+        <p className="text-lg text-[#5e6a82] mb-8 leading-relaxed">
+          Your purchase was successful. Your download should begin automatically in a few seconds. We&apos;ve also sent the receipt and download link to your email!
+        </p>
+        
+        <button 
+          onClick={() => window.location.href = '/'}
+          className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
+        >
+          Return to Home
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Router App ───────────────────────────────────────────────────────────────
+export default function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => setCurrentPath(window.location.pathname);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  if (currentPath === '/success') {
+    return <SuccessPage />;
+  }
+  
+  return <LandingPage />;
+}
+
