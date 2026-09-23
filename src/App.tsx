@@ -76,7 +76,7 @@ const AppPopupInteractive = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] p-5 w-[340px] border border-gray-100 text-left">
+    <div className="bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] p-5 w-[280px] sm:w-[340px] border border-gray-100 text-left">
       <div className="flex items-center justify-between mb-1">
         <span className="font-bold text-gray-900 text-xl">Mino</span>
         <Settings className="w-4 h-4 text-gray-400 cursor-pointer hover:text-gray-600 transition-colors" />
@@ -120,7 +120,7 @@ const AppPopupInteractive = () => {
 
 const HeroInteractiveApp = () => {
   return (
-    <div className="w-full h-[600px] rounded-[2rem] overflow-hidden relative shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-white/60 bg-gradient-to-b from-[#f2f7ff] via-[#eef5ff] to-[#e4efff]">
+    <div className="w-full h-[450px] md:h-[600px] rounded-[2rem] overflow-hidden relative shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-white/60 bg-gradient-to-b from-[#f2f7ff] via-[#eef5ff] to-[#e4efff]">
 
       {/* Background Soft Glows */}
       <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-white rounded-full blur-[80px] opacity-60 pointer-events-none"></div>
@@ -153,15 +153,15 @@ const HeroInteractiveApp = () => {
             </div>
 
             {/* The Dropdown App Mockup */}
-            <div className="absolute top-[calc(100%+12px)] left-1/2 -translate-x-1/2 z-50">
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white transform rotate-45 border-l border-t border-gray-100 rounded-sm"></div>
+            <div className="absolute top-[calc(100%+12px)] right-[-10px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-50">
+              <div className="absolute -top-2 right-4 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-4 h-4 bg-white transform rotate-45 border-l border-t border-gray-100 rounded-sm"></div>
               <AppPopupInteractive />
             </div>
           </div>
 
           <svg className="w-4 h-4 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
           <svg className="w-5 h-5 text-gray-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line></svg>
-          <span className="font-semibold text-gray-900">Mon 9:41 AM</span>
+          <span className="hidden sm:inline-block font-semibold text-gray-900">Mon 9:41 AM</span>
         </div>
       </div>
 
