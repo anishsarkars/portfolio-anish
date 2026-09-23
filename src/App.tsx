@@ -746,7 +746,7 @@ function SuccessPage() {
           Thank you!
         </h1>
         <p className="text-lg text-[#5e6a82] mb-8 leading-relaxed">
-          Your purchase was successful. Your download should begin automatically in a few seconds. We&apos;ve also sent the receipt and download link to your email!
+          Your purchase was successful! Dodo Payments is securely processing your order and will email you the receipt and download link for Mino shortly.
         </p>
 
         <button
