@@ -218,7 +218,7 @@ function LandingPage() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert('Failed to initiate checkout. Please try again.');
+        alert(data.error || 'Failed to initiate checkout. Please try again.');
         setIsCheckingOut(false);
       }
     } catch (err) {
