@@ -196,36 +196,6 @@ const HeroInteractiveApp = () => {
   );
 };
 
-// ─── Company Logos ────────────────────────────────────────────────────────────
-const CompanyLogos = () => (
-  <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-    {/* PRODUCTHUNT */}
-    <span className="text-sm font-bold tracking-widest text-gray-300 uppercase">ProductHunt</span>
-    {/* APP STORE */}
-    <div className="flex items-center gap-1.5">
-      <AppleLogo className="w-4 h-4 text-gray-300" />
-      <span className="text-sm font-semibold tracking-widest text-gray-300 uppercase">App Store</span>
-    </div>
-    {/* G2 */}
-    <span className="text-2xl font-black italic text-gray-300" style={{ fontFamily: 'Georgia, serif' }}>G2</span>
-    {/* HACKERNEWS */}
-    <div className="flex items-center gap-1.5">
-      <div className="w-5 h-5 bg-gray-200 rounded flex items-center justify-center">
-        <span className="text-[10px] font-black text-gray-400">Y</span>
-      </div>
-      <span className="text-sm font-bold tracking-widest text-gray-300 uppercase">HN</span>
-    </div>
-    {/* SETAPP */}
-    <span className="text-sm font-bold tracking-widest text-gray-300 uppercase">Setapp</span>
-    {/* INDIE HACKERS */}
-    <div className="flex items-center gap-1.5">
-      <div className="w-5 h-5 rounded-full border-2 border-gray-200 flex items-center justify-center">
-        <span className="text-[9px] font-black text-gray-300">IH</span>
-      </div>
-      <span className="text-sm font-bold tracking-widest text-gray-300 uppercase">Indie Hackers</span>
-    </div>
-  </div>
-);
 
 // ─── Landing Page ─────────────────────────────────────────────────────────────────
 function LandingPage() {
@@ -361,38 +331,20 @@ function LandingPage() {
             ))}
           </div>
 
-          {/* ── COMPANY LOGOS ────────────────────────────────────────────────── */}
-          <div
-            className="animate-fade-in-up mt-24"
-            style={{ animationDelay: '0.8s', opacity: 0 }}
-          >
-            <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-8">
-              Users and builders used at
-            </p>
-            <CompanyLogos />
-          </div>
+
         </section>
 
         {/* ── SOCIAL PROOF STRIP ─────────────────────────────────────────────── */}
         <div className="border-t border-gray-100 px-6 py-10 flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-gray-200 text-center">
           {[
             { value: '25K+', label: 'Happy users' },
-            { value: '4.8', label: 'App Store rating', stars: true },
-            { value: '3.5 MB', label: 'App size' },
+            { value: 'Offline', label: 'Works without internet' },
+            { value: 'Under 3MB', label: 'App size' },
             { value: 'One-time', label: 'Purchase, yours forever' },
           ].map((stat) => (
             <div key={stat.label} className="py-6 md:py-0 px-10 w-full md:w-auto">
               <div className="flex items-center justify-center gap-2">
                 <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
-                {stat.stars && (
-                  <div className="flex items-center gap-0.5 text-yellow-400">
-                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
-                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
-                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
-                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
-                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
-                  </div>
-                )}
               </div>
               <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
             </div>
