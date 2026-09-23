@@ -374,15 +374,26 @@ function LandingPage() {
         </section>
 
         {/* ── SOCIAL PROOF STRIP ─────────────────────────────────────────────── */}
-        <div className="border-t border-gray-100 px-6 py-10 flex flex-col md:flex-row items-center justify-center gap-10 text-center">
+        <div className="border-t border-gray-100 px-6 py-10 flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-gray-200 text-center">
           {[
-            { value: '18.3K+', label: 'Happy users' },
-            { value: '4.9', label: 'App Store rating' },
-            { value: '<1MB', label: 'App size' },
-            { value: 'Free', label: 'To get started' },
+            { value: '25K+', label: 'Happy users' },
+            { value: '4.8', label: 'App Store rating', stars: true },
+            { value: '3.5 MB', label: 'App size' },
+            { value: 'One-time', label: 'Purchase, yours forever' },
           ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+            <div key={stat.label} className="py-6 md:py-0 px-10 w-full md:w-auto">
+              <div className="flex items-center justify-center gap-2">
+                <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+                {stat.stars && (
+                  <div className="flex items-center gap-0.5 text-yellow-400">
+                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
+                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
+                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
+                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
+                    <Star className="w-4 h-4" fill="currentColor" stroke="none" />
+                  </div>
+                )}
+              </div>
               <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
             </div>
           ))}
