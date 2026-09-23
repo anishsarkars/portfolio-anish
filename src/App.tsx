@@ -469,12 +469,12 @@ function LandingPage() {
                 <Zap className="w-5 h-5 text-gray-700" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1.5">Under 1 MB</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1.5">Under 3 MB</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">Mino is tiny by design. Instant launch, zero battery drain, no background processes hogging memory.</p>
               </div>
               <div className="mt-auto">
                 <div className="flex justify-between text-xs text-gray-400 mb-1.5">
-                  <span>App size</span><span className="font-semibold text-gray-700">&lt;1 MB</span>
+                  <span>App size</span><span className="font-semibold text-gray-700">&lt;3 MB</span>
                 </div>
                 <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
                   <div className="h-full w-[4%] bg-gray-900 rounded-full" />
