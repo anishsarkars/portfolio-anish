@@ -202,7 +202,31 @@ const HeroInteractiveApp = () => {
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [price, setPrice] = useState('$4.99');
-  const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [productId, setProductId] = useState('pdt_0NoBY402NVcTMuBFidffE');
+
+  const handleCheckout = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsCheckingOut(true);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId })
+      });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Failed to initiate checkout. Please try again.');
+        setIsCheckingOut(false);
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Checkout error. Please try again later.');
+      setIsCheckingOut(false);
+    }
+  };
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
@@ -210,7 +234,7 @@ function LandingPage() {
       .then(data => {
         if (data.country_code === 'IN') {
           setPrice('₹299');
-          setCheckoutUrl('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
+          setProductId('pdt_0NoBY402NVcTMuBFidffE');
         }
       })
       .catch(err => console.error('Geolocation failed:', err));
@@ -295,15 +319,14 @@ function LandingPage() {
             className="animate-fade-in-up mb-16"
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
-            <a
-              href={checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
+            <button
+              onClick={handleCheckout}
+              disabled={isCheckingOut}
+              className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2 disabled:opacity-70 disabled:hover:scale-100"
             >
               <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
-              Get Mino for Mac
-            </a>
+              {isCheckingOut ? 'Loading...' : 'Get Mino for Mac'}
+            </button>
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
             </p>
@@ -549,15 +572,14 @@ function LandingPage() {
                 ))}
               </ul>
 
-              <a
-                href={checkoutUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
+              <button
+                onClick={handleCheckout}
+                disabled={isCheckingOut}
+                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
               >
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
-                Download App
-              </a>
+                {isCheckingOut ? 'Loading...' : 'Download App'}
+              </button>
               <p className="text-center text-white/30 text-xs mt-3">14-day money-back guarantee</p>
             </div>
           </div>
@@ -584,15 +606,14 @@ function LandingPage() {
             <p className="text-lg text-gray-500 mb-8 max-w-md mx-auto">
               Join the makers who&apos;ve made Mino their daily task companion.
             </p>
-            <a
-              href={checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
+            <button
+              onClick={handleCheckout}
+              disabled={isCheckingOut}
+              className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10 disabled:opacity-70"
             >
               <AppleLogo className="w-4 h-4" fill="currentColor" />
-              Download for macOS
-            </a>
+              {isCheckingOut ? 'Loading...' : 'Download for macOS'}
+            </button>
             <p className="text-xs text-gray-400 mt-3">macOS 13 Ventura or later · No account required</p>
           </div>
 
