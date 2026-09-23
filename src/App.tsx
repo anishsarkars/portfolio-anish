@@ -350,7 +350,7 @@ function LandingPage() {
           <div className="flex flex-wrap justify-center gap-3 mt-8">
             {[
               { Icon: Zap, text: 'One-click capture' },
-              { Icon: Layers, text: 'Smart task grouping' },
+              { Icon: Layers, text: 'Focus Timer' },
               { Icon: Target, text: 'Focus mode built-in' },
               { Icon: AppleLogo, text: 'Native macOS' },
             ].map(({ Icon, text }) => (
@@ -367,7 +367,7 @@ function LandingPage() {
             style={{ animationDelay: '0.8s', opacity: 0 }}
           >
             <p className="text-xs font-medium text-gray-400 uppercase tracking-widest mb-8">
-              Loved by makers featured on
+              Users and builders used at
             </p>
             <CompanyLogos />
           </div>
