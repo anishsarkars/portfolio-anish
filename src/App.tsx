@@ -336,6 +336,7 @@ function LandingPage() {
               rel="noopener noreferrer"
               className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
             >
+              <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
               Get Mino for Mac
             </a>
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
