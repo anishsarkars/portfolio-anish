@@ -195,7 +195,7 @@ const HeroInteractiveApp = () => {
 // ─── Landing Page ─────────────────────────────────────────────────────────────────
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [price, setPrice] = useState('$4.99');
+  const [price, setPrice] = useState('$3.99');
   const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
 
   useEffect(() => {
