@@ -361,7 +361,6 @@ function LandingPage() {
         {/* ── SOCIAL PROOF STRIP ─────────────────────────────────────────────── */}
         <div className="border-t border-gray-100 px-6 py-10 flex flex-col md:flex-row items-center justify-center divide-y md:divide-y-0 md:divide-x divide-gray-200 text-center">
           {[
-            { value: '25K+', label: 'Happy users' },
             { value: 'Offline', label: 'Works without internet' },
             { value: 'Under 3MB', label: 'App size' },
             { value: 'One-time', label: 'Purchase, yours forever' },
