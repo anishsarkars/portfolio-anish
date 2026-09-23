@@ -269,15 +269,9 @@ function LandingPage() {
 
             {/* Links (desktop) */}
             <div className="hidden md:flex items-center gap-6">
-              {['Features', 'Pricing', 'Blog', 'Contact'].map((label) => (
-                <a
-                  key={label}
-                  href={`#${label.toLowerCase()}`}
-                  className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors"
-                >
-                  {label}
-                </a>
-              ))}
+              <a href="#features" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Features</a>
+              <a href="#pricing" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Pricing</a>
+              <a href="mailto:hello@mino.aniish.me" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Contact</a>
             </div>
 
             {/* Mobile hamburger */}
@@ -297,9 +291,9 @@ function LandingPage() {
         {/* Mobile nav drawer */}
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/50 p-6 space-y-4 z-50 animate-fade-in-up">
-            {['Features', 'Pricing', 'Blog', 'Contact'].map((l) => (
-              <a key={l} href="#" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]">{l}</a>
-            ))}
+            <a href="#features" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Features</a>
+            <a href="#pricing" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
+            <a href="mailto:hello@mino.aniish.me" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           </div>
         )}
 
@@ -398,7 +392,7 @@ function LandingPage() {
         {/* ════════════════════════════════════════════════════════════════════
             FEATURES SECTION
         ═══════════════════════════════════════════════════════════════════ */}
-        <section className="border-t border-gray-100 px-6 py-24 max-w-7xl mx-auto">
+        <section id="features" className="border-t border-gray-100 px-6 py-24 max-w-7xl mx-auto">
 
           {/* Section header */}
           <div className="text-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
@@ -538,7 +532,7 @@ function LandingPage() {
         {/* ════════════════════════════════════════════════════════════════════
             PRICING SECTION
         ═══════════════════════════════════════════════════════════════════ */}
-        <section className="border-t border-gray-100 px-6 py-24 max-w-7xl mx-auto">
+        <section id="pricing" className="border-t border-gray-100 px-6 py-24 max-w-7xl mx-auto">
 
           {/* Section header */}
           <div className="text-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
@@ -669,31 +663,10 @@ function LandingPage() {
               </div>
 
               {/* Link columns */}
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-sm">
-                <div>
-                  <p className="font-semibold text-gray-900 mb-3">Product</p>
-                  <ul className="space-y-2">
-                    {['Features', 'Pricing', 'Changelog', 'Roadmap'].map((l) => (
-                      <li key={l}><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors">{l}</a></li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-3">Company</p>
-                  <ul className="space-y-2">
-                    {['About', 'Blog', 'Press kit', 'Contact'].map((l) => (
-                      <li key={l}><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors">{l}</a></li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900 mb-3">Legal</p>
-                  <ul className="space-y-2">
-                    {['Privacy policy', 'Terms of use', 'Cookie policy'].map((l) => (
-                      <li key={l}><a href="#" className="text-gray-500 hover:text-gray-900 transition-colors">{l}</a></li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="flex flex-col sm:flex-row gap-6 md:gap-8 text-sm font-medium">
+                <a href="/terms" className="text-gray-500 hover:text-gray-900 transition-colors">Terms of use</a>
+                <a href="/privacy" className="text-gray-500 hover:text-gray-900 transition-colors">Privacy policy</a>
+                <a href="mailto:hello@mino.aniish.me" className="text-gray-500 hover:text-gray-900 transition-colors">Contact us</a>
               </div>
             </div>
 
@@ -773,7 +746,59 @@ export default function App() {
   if (currentPath === '/success') {
     return <SuccessPage />;
   }
+  if (currentPath === '/terms') {
+    return <TermsPage />;
+  }
+  if (currentPath === '/privacy') {
+    return <PrivacyPage />;
+  }
 
   return <LandingPage />;
+}
+
+// ─── Legal Pages ──────────────────────────────────────────────────────────────
+function TermsPage() {
+  return (
+    <div className="min-h-screen bg-white px-6 py-20 font-sans">
+      <div className="max-w-3xl mx-auto">
+        <a href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 mb-10 font-medium">
+          <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+        </a>
+        <h1 className="text-4xl font-serif text-gray-900 mb-8">Terms of Use</h1>
+        <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-6">
+          <p>Last updated: {new Date().toLocaleDateString()}</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">1. Agreement to Terms</h2>
+          <p>By accessing or using Mino, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the service.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">2. License</h2>
+          <p>Upon purchase, you are granted a non-exclusive, non-transferable license to download and use Mino for personal or professional use. You may not distribute, resell, or lease the software.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">3. Refunds</h2>
+          <p>We offer a 14-day money-back guarantee. If you are not satisfied with Mino within the first 14 days of purchase, contact us for a full refund.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PrivacyPage() {
+  return (
+    <div className="min-h-screen bg-white px-6 py-20 font-sans">
+      <div className="max-w-3xl mx-auto">
+        <a href="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 mb-10 font-medium">
+          <ArrowRight className="w-4 h-4 rotate-180" /> Back to Home
+        </a>
+        <h1 className="text-4xl font-serif text-gray-900 mb-8">Privacy Policy</h1>
+        <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-6">
+          <p>Last updated: {new Date().toLocaleDateString()}</p>
+          <p>Mino is built with privacy in mind. We believe your data belongs to you.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">Data Collection</h2>
+          <p>Mino operates entirely offline on your Mac. We do not track your tasks, send your data to any servers, or use analytics software inside the app. Everything stays on your machine.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">Payment Information</h2>
+          <p>When you purchase Mino, your payment is processed securely by Dodo Payments. We do not store or have access to your credit card details.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8">Contact</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us at hello@mino.aniish.me.</p>
+        </div>
+      </div>
+    </div>
+  );
 }
 
