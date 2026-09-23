@@ -14,6 +14,7 @@ import {
   Keyboard,
   Mail,
   Heart,
+  Linkedin,
 } from 'lucide-react';
 import './index.css';
 
@@ -581,7 +582,7 @@ function LandingPage() {
               Ready to get things done?
             </h2>
             <p className="text-lg text-gray-500 mb-8 max-w-md mx-auto">
-              Join 18,000+ people who&apos;ve made Mino their daily task companion.
+              Join the makers who&apos;ve made Mino their daily task companion.
             </p>
             <a
               href={checkoutUrl}
@@ -614,11 +615,10 @@ function LandingPage() {
                 {/* Social icons */}
                 <div className="flex items-center gap-3 mt-1">
                   {[
-                    { Icon: TwitterIcon, href: '#' },
-                    { Icon: GithubIcon, href: '#' },
-                    { Icon: Mail, href: '#' },
+                    { Icon: TwitterIcon, href: 'https://x.com/anishsarkars' },
+                    { Icon: Linkedin, href: 'https://linkedin.com/in/anishsarkar-/' },
                   ].map(({ Icon, href }, i) => (
-                    <a key={href + i} href={href} className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors">
+                    <a key={href + i} href={href} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors">
                       <Icon className="w-3.5 h-3.5" />
                     </a>
                   ))}
@@ -636,7 +636,7 @@ function LandingPage() {
             {/* Bottom bar */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 mt-10 pt-6 border-t border-gray-100">
               <p className="text-xs text-gray-400">
-                © {new Date().getFullYear()} Mino. All rights reserved. Made with{' '}
+                © {new Date().getFullYear()} Mino. All rights reserved. Made by Anish with{' '}
                 <Heart className="inline w-3 h-3 text-gray-400 mx-0.5" fill="currentColor" />
                 for doers.
               </p>
