@@ -195,7 +195,7 @@ const HeroInteractiveApp = () => {
 // ─── Landing Page ─────────────────────────────────────────────────────────────────
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [price, setPrice] = useState('$3.99');
+  const [price, setPrice] = useState('$2.99');
   const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
 
   useEffect(() => {
@@ -299,13 +299,7 @@ function LandingPage() {
                 <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
                 Get Mino for Mac
               </a>
-              <a
-                href="/Mino.dmg"
-                download
-                className="bg-white text-gray-900 border border-gray-200 px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-gray-50 transition-all hover:scale-105 active:scale-95 shadow-sm inline-flex items-center gap-2"
-              >
-                Try Free for 14 Days
-              </a>
+
             </div>
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
@@ -560,13 +554,7 @@ function LandingPage() {
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
                 Download App
               </a>
-              <a
-                href="/Mino.dmg"
-                download
-                className="w-full bg-transparent border border-white/20 text-white rounded-xl py-3 px-4 text-sm font-semibold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-              >
-                Try Free for 14 Days
-              </a>
+
               <p className="text-center text-white/30 text-xs mt-3">14-day money-back guarantee</p>
             </div>
           </div>
@@ -603,13 +591,7 @@ function LandingPage() {
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
                 Download for macOS
               </a>
-              <a
-                href="/Mino.dmg"
-                download
-                className="bg-white text-gray-900 border border-gray-200 px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-50 transition-all shadow-sm inline-flex items-center gap-2"
-              >
-                Try Free for 14 Days
-              </a>
+
             </div>
             <p className="text-xs text-gray-400 mt-5">macOS 13 Ventura or later · No account required</p>
           </div>
