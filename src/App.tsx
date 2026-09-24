@@ -195,7 +195,7 @@ const HeroInteractiveApp = () => {
 // ─── Landing Page ─────────────────────────────────────────────────────────────────
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [price, setPrice] = useState('$2.99');
+  const [price, setPrice] = useState('$3.99');
   const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
 
   useEffect(() => {
@@ -297,7 +297,7 @@ function LandingPage() {
                 className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
               >
                 <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
-                Get Mino for Mac
+                Buy Mino - $3.99
               </a>
 
             </div>
@@ -521,7 +521,7 @@ function LandingPage() {
                 <div className="flex items-baseline gap-1">
                   <span className="text-5xl font-bold text-white">{price}</span>
                 </div>
-                <p className="text-sm text-white/50 mt-2">One-time payment. Full peace of mind.</p>
+                <p className="text-sm text-white/50 mt-2">Limited time will go to $5.99 in some time.<br/>One-time payment. Full peace of mind.</p>
               </div>
 
               <ul className="space-y-3 mb-8 flex-1 text-left">
