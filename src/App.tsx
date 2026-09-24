@@ -289,15 +289,24 @@ function LandingPage() {
             className="animate-fade-in-up mb-16"
             style={{ animationDelay: '0.3s', opacity: 0 }}
           >
-            <a
-              href={checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
-            >
-              <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
-              Get Mino for Mac
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
+              >
+                <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
+                Get Mino for Mac
+              </a>
+              <a
+                href="/Mino.dmg"
+                download
+                className="bg-white text-gray-900 border border-gray-200 px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-gray-50 transition-all hover:scale-105 active:scale-95 shadow-sm inline-flex items-center gap-2"
+              >
+                Try Free for 14 Days
+              </a>
+            </div>
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
             </p>
@@ -546,10 +555,17 @@ function LandingPage() {
                 href={checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2 mb-3"
               >
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
                 Download App
+              </a>
+              <a
+                href="/Mino.dmg"
+                download
+                className="w-full bg-transparent border border-white/20 text-white rounded-xl py-3 px-4 text-sm font-semibold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+              >
+                Try Free for 14 Days
               </a>
               <p className="text-center text-white/30 text-xs mt-3">14-day money-back guarantee</p>
             </div>
@@ -577,16 +593,25 @@ function LandingPage() {
             <p className="text-lg text-gray-500 mb-8 max-w-md mx-auto">
               Join the makers who&apos;ve made Mino their daily task companion.
             </p>
-            <a
-              href={checkoutUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
-            >
-              <AppleLogo className="w-4 h-4" fill="currentColor" />
-              Download for macOS
-            </a>
-            <p className="text-xs text-gray-400 mt-3">macOS 13 Ventura or later · No account required</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
+              >
+                <AppleLogo className="w-4 h-4" fill="currentColor" />
+                Download for macOS
+              </a>
+              <a
+                href="/Mino.dmg"
+                download
+                className="bg-white text-gray-900 border border-gray-200 px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-50 transition-all shadow-sm inline-flex items-center gap-2"
+              >
+                Try Free for 14 Days
+              </a>
+            </div>
+            <p className="text-xs text-gray-400 mt-5">macOS 13 Ventura or later · No account required</p>
           </div>
 
           {/* Divider */}
