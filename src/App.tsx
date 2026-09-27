@@ -210,7 +210,7 @@ function LandingPage() {
   }, []);
 
   const basePrice = countryCode === 'IN' ? 149 : 5;
-  const baseCrossedPrice = countryCode === 'IN' ? 299 : 9;
+  const baseCrossedPrice = countryCode === 'IN' ? 299 : 7;
   const currency = countryCode === 'IN' ? '₹' : '$';
   
   const currentPrice = `${currency}${basePrice * quantity}`;
@@ -305,7 +305,7 @@ function LandingPage() {
                 className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
               >
                 <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
-                Buy Mino - {currentPrice}
+                Get Mino - {currentPrice}
               </a>
 
             </div>
@@ -614,7 +614,7 @@ function LandingPage() {
                 className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
               >
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
-                Download for macOS
+                Get Mino for macOS
               </a>
 
             </div>
