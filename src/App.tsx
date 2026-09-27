@@ -209,7 +209,7 @@ function LandingPage() {
       .catch(err => console.error('Geolocation failed:', err));
   }, []);
 
-  const basePrice = countryCode === 'IN' ? 149 : 5;
+  const basePrice = countryCode === 'IN' ? 249 : 5;
   const baseCrossedPrice = countryCode === 'IN' ? 299 : 7;
   const currency = countryCode === 'IN' ? '₹' : '$';
   
