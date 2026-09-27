@@ -216,7 +216,7 @@ function LandingPage() {
   const currentPrice = `${currency}${basePrice * quantity}`;
   const currentCrossedPrice = `${currency}${baseCrossedPrice * quantity}`;
   
-  const checkoutUrl = `https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=${quantity}&redirect_url=https://mino.aniish.me/success`;
+  const checkoutUrl = `https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=${quantity}&redirect_url=https://minotasks.app/success`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#ebf0fe] via-[#f6f9ff] to-white relative overflow-hidden font-sans">
@@ -244,7 +244,7 @@ function LandingPage() {
             <div className="hidden md:flex items-center gap-6">
               <a href="#features" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Features</a>
               <a href="#pricing" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Pricing</a>
-              <a href="mailto:hello@mino.aniish.me" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Contact</a>
+              <a href="mailto:hello@minotasks.app" className="text-[13.5px] font-medium text-[#5e6a82] hover:text-[#1c1e26] transition-colors">Contact</a>
             </div>
 
             {/* Mobile hamburger */}
@@ -266,7 +266,7 @@ function LandingPage() {
           <div className="md:hidden absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/50 p-6 space-y-4 z-50 animate-fade-in-up">
             <a href="#features" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Features</a>
             <a href="#pricing" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Pricing</a>
-            <a href="mailto:hello@mino.aniish.me" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+            <a href="mailto:hello@minotasks.app" className="block text-center text-sm font-medium text-[#5e6a82] hover:text-[#1c1e26]" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           </div>
         )}
 
@@ -653,7 +653,7 @@ function LandingPage() {
               <div className="flex flex-col sm:flex-row gap-6 md:gap-8 text-sm font-medium">
                 <a href="/terms" className="text-gray-500 hover:text-gray-900 transition-colors">Terms of use</a>
                 <a href="/privacy" className="text-gray-500 hover:text-gray-900 transition-colors">Privacy policy</a>
-                <a href="mailto:hello@mino.aniish.me" className="text-gray-500 hover:text-gray-900 transition-colors">Contact us</a>
+                <a href="mailto:hello@minotasks.app" className="text-gray-500 hover:text-gray-900 transition-colors">Contact us</a>
               </div>
             </div>
 
@@ -782,7 +782,7 @@ function PrivacyPage() {
           <h2 className="text-xl font-semibold text-gray-900 mt-8">Payment Information</h2>
           <p>When you purchase Mino, your payment is processed securely by Dodo Payments. We do not store or have access to your credit card details.</p>
           <h2 className="text-xl font-semibold text-gray-900 mt-8">Contact</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at hello@mino.aniish.me.</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at hello@minotasks.app.</p>
         </div>
       </div>
     </div>
