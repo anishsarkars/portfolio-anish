@@ -299,9 +299,7 @@ function LandingPage() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href={checkoutUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#pricing"
                 className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
               >
                 <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
@@ -517,40 +515,27 @@ function LandingPage() {
 
           {/* Pricing card */}
           <div className="max-w-[420px] mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
-            <div className="bg-white border border-gray-200/80 rounded-[2rem] p-8 flex flex-col relative overflow-hidden shadow-2xl shadow-blue-900/5">
+            <div className="bg-[#0f172a] border border-gray-800 rounded-[2rem] p-8 flex flex-col relative overflow-hidden shadow-2xl shadow-blue-900/10">
               
-              <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-5 shadow-sm border border-gray-100 p-1.5">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-5 shadow-sm border border-gray-200 p-1.5">
                 <img src="/mascot-transparent.png" alt="Mino Logo" className="w-full h-full object-contain" />
               </div>
 
-              <h3 className="text-[22px] font-semibold text-gray-900 mb-6 text-left tracking-tight">Mino</h3>
-
-              {/* Toggle Switch */}
-              <div className="flex bg-gray-100/80 p-1 rounded-xl mb-6 border border-gray-200/50">
-                {[1, 2, 3].map(num => (
-                  <button
-                    key={num}
-                    onClick={() => setQuantity(num)}
-                    className={`flex-1 text-[13px] py-2 rounded-lg font-semibold transition-all duration-200 ${quantity === num ? 'bg-white text-gray-900 shadow-sm border-gray-200' : 'text-gray-500 hover:text-gray-700 hover:bg-black/5'}`}
-                  >
-                    {num} Mac{num > 1 ? 's' : ''}
-                  </button>
-                ))}
-              </div>
+              <h3 className="text-[22px] font-semibold text-white mb-6 text-left tracking-tight">Mino</h3>
 
               {/* Price */}
               <div className="flex items-baseline gap-2.5 mb-6 text-left">
-                <span className="text-5xl font-bold text-gray-900 tracking-tight">{currentPrice}</span>
-                <span className="text-[22px] font-medium text-gray-400 line-through decoration-1">{currentCrossedPrice}</span>
+                <span className="text-5xl font-bold text-white tracking-tight">{currentPrice}</span>
+                <span className="text-[22px] font-medium text-gray-500 line-through decoration-1">{currentCrossedPrice}</span>
               </div>
 
               {/* Launch Offer Box */}
-              <div className="bg-[#fafafa] border border-gray-100 rounded-xl p-4 mb-6 text-left">
-                <p className="text-sm font-semibold text-gray-900 mb-1">Launch Offer</p>
-                <p className="text-[13px] text-gray-500">Special pricing for a limited time.</p>
+              <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
+                <p className="text-sm font-semibold text-white mb-1">Launch Offer</p>
+                <p className="text-[13px] text-gray-400">Special pricing for a limited time.</p>
               </div>
 
-              <p className="text-[13px] font-semibold text-gray-900 mb-6 text-left">One-time purchase</p>
+              <p className="text-[13px] font-semibold text-white mb-6 text-left">One-time purchase</p>
 
               {/* Features List */}
               <ul className="space-y-4 mb-8 text-left">
@@ -559,10 +544,10 @@ function LandingPage() {
                   'All features included',
                   'Works fully offline',
                   'Lifetime updates included',
-                  `License for ${quantity} Mac${quantity > 1 ? 's' : ''}`,
+                  `License for 1 Mac`,
                 ].map((text) => (
-                  <li key={text} className="flex items-center gap-3.5 text-[14px] text-gray-600 font-medium">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400 flex-shrink-0">
+                  <li key={text} className="flex items-center gap-3.5 text-[14px] text-gray-300 font-medium">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500 flex-shrink-0">
                       <path d="M7 1V13M1 7H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                     <span>{text}</span>
@@ -575,7 +560,7 @@ function LandingPage() {
                 href={checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#12131a] text-white border border-transparent rounded-xl py-3.5 px-4 text-[15px] font-medium hover:bg-black transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full bg-white text-gray-900 border border-transparent rounded-xl py-3.5 px-4 text-[15px] font-medium hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98]"
               >
                 <AppleLogo className="w-[18px] h-[18px]" fill="currentColor" />
                 Get Mino
@@ -608,9 +593,7 @@ function LandingPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href={checkoutUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#pricing"
                 className="bg-black text-white px-8 py-3.5 rounded-full text-[15px] font-semibold hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg shadow-black/10"
               >
                 <AppleLogo className="w-4 h-4" fill="currentColor" />
