@@ -195,20 +195,28 @@ const HeroInteractiveApp = () => {
 // ─── Landing Page ─────────────────────────────────────────────────────────────────
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [price, setPrice] = useState('$5');
-  const [checkoutUrl, setCheckoutUrl] = useState('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
+  const [countryCode, setCountryCode] = useState('US');
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
       .then(res => res.json())
       .then(data => {
         if (data.country_code === 'IN') {
-          setPrice('₹149');
-          setCheckoutUrl('https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=1&redirect_url=https://mino.aniish.me/success');
+          setCountryCode('IN');
         }
       })
       .catch(err => console.error('Geolocation failed:', err));
   }, []);
+
+  const basePrice = countryCode === 'IN' ? 149 : 5;
+  const baseCrossedPrice = countryCode === 'IN' ? 299 : 9;
+  const currency = countryCode === 'IN' ? '₹' : '$';
+  
+  const currentPrice = `${currency}${basePrice * quantity}`;
+  const currentCrossedPrice = `${currency}${baseCrossedPrice * quantity}`;
+  
+  const checkoutUrl = `https://checkout.dodopayments.com/buy/pdt_0NoBY402NVcTMuBFidffE?quantity=${quantity}&redirect_url=https://mino.aniish.me/success`;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#ebf0fe] via-[#f6f9ff] to-white relative overflow-hidden font-sans">
@@ -297,7 +305,7 @@ function LandingPage() {
                 className="bg-[#12131a] text-white px-8 py-3.5 rounded-full text-[15px] font-medium hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-[0_4px_14px_rgba(0,0,0,0.1)] inline-flex items-center gap-2"
               >
                 <AppleLogo className="w-4 h-4 -mt-[1px]" fill="currentColor" />
-                Buy Mino - $5
+                Buy Mino - {currentPrice}
               </a>
 
             </div>
@@ -496,66 +504,83 @@ function LandingPage() {
 
           {/* Section header */}
           <div className="text-center mb-16 animate-fade-in-up" style={{ animationDelay: '0.1s', opacity: 0 }}>
-            <div className="inline-flex items-center gap-2 bg-gray-100 rounded-full px-4 py-1.5 mb-5">
-              <Star className="w-3.5 h-3.5 text-gray-500" fill="currentColor" />
-              <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Pricing</span>
+            <div className="inline-flex items-center gap-2 bg-gray-100 border border-gray-200/50 rounded-full px-4 py-1.5 mb-5">
+              <span className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Pricing</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-gray-900 mb-4">
-              Simple, honest pricing.
+              Simple pricing. Yours for good.
             </h2>
             <p className="text-lg text-gray-500 max-w-md mx-auto">
-              Pay once. Use forever. No subscription traps.
+              One purchase. Pick the number of Macs you need.
             </p>
           </div>
 
           {/* Pricing card */}
-          <div className="max-w-md mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
-            <div className="bg-gray-900 rounded-3xl p-8 flex flex-col relative overflow-hidden">
-              {/* Popular badge */}
-              <div className="absolute top-5 right-5 bg-white/10 text-white/80 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                Lifetime Access
+          <div className="max-w-[420px] mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s', opacity: 0 }}>
+            <div className="bg-white border border-gray-200/80 rounded-[2rem] p-8 flex flex-col relative overflow-hidden shadow-2xl shadow-blue-900/5">
+              
+              <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-5 shadow-sm border border-gray-100 p-1.5">
+                <img src="/mascot-transparent.png" alt="Mino Logo" className="w-full h-full object-contain" />
               </div>
 
-              <div className="mb-6 text-left">
-                <p className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-3">Pro</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-bold text-white">{price}</span>
-                </div>
-                <p className="text-sm text-white/50 mt-2">Limited time will go to $5.99 in some time.<br/>One-time payment. Full peace of mind.</p>
+              <h3 className="text-[22px] font-semibold text-gray-900 mb-6 text-left tracking-tight">Mino</h3>
+
+              {/* Toggle Switch */}
+              <div className="flex bg-gray-100/80 p-1 rounded-xl mb-6 border border-gray-200/50">
+                {[1, 2, 3].map(num => (
+                  <button
+                    key={num}
+                    onClick={() => setQuantity(num)}
+                    className={`flex-1 text-[13px] py-2 rounded-lg font-semibold transition-all duration-200 ${quantity === num ? 'bg-white text-gray-900 shadow-sm border-gray-200' : 'text-gray-500 hover:text-gray-700 hover:bg-black/5'}`}
+                  >
+                    {num} Mac{num > 1 ? 's' : ''}
+                  </button>
+                ))}
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1 text-left">
+              {/* Price */}
+              <div className="flex items-baseline gap-2.5 mb-6 text-left">
+                <span className="text-5xl font-bold text-gray-900 tracking-tight">{currentPrice}</span>
+                <span className="text-[22px] font-medium text-gray-400 line-through decoration-1">{currentCrossedPrice}</span>
+              </div>
+
+              {/* Launch Offer Box */}
+              <div className="bg-[#fafafa] border border-gray-100 rounded-xl p-4 mb-6 text-left">
+                <p className="text-sm font-semibold text-gray-900 mb-1">Launch Offer</p>
+                <p className="text-[13px] text-gray-500">Special pricing for a limited time.</p>
+              </div>
+
+              <p className="text-[13px] font-semibold text-gray-900 mb-6 text-left">One-time purchase</p>
+
+              {/* Features List */}
+              <ul className="space-y-4 mb-8 text-left">
                 {[
-                  { text: 'Unlimited tasks' },
-                  { text: 'Menu bar access' },
-                  { text: 'Full keyboard shortcut suite' },
-                  { text: 'Focus mode' },
-                  { text: 'Priority email support' },
-                  { text: 'All future updates', sub: 'forever' },
-                ].map(({ text, sub }) => (
-                  <li key={text} className="flex items-center gap-3 text-sm text-white/80">
-                    <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
-                    </div>
-                    <span>
-                      {text}
-                      {sub && <span className="text-white/30 ml-1 text-xs">({sub})</span>}
-                    </span>
+                  'One-time purchase',
+                  'All features included',
+                  'Works fully offline',
+                  'Lifetime updates included',
+                  `License for ${quantity} Mac${quantity > 1 ? 's' : ''}`,
+                ].map((text) => (
+                  <li key={text} className="flex items-center gap-3.5 text-[14px] text-gray-600 font-medium">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400 flex-shrink-0">
+                      <path d="M7 1V13M1 7H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>{text}</span>
                   </li>
                 ))}
               </ul>
 
+              {/* CTA Button */}
               <a
                 href={checkoutUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-white text-gray-900 rounded-xl py-3 px-4 text-sm font-semibold hover:bg-gray-100 transition-all flex items-center justify-center gap-2 mb-3"
+                className="w-full bg-[#12131a] text-white border border-transparent rounded-xl py-3.5 px-4 text-[15px] font-medium hover:bg-black transition-all flex items-center justify-center gap-2 shadow-md hover:scale-[1.02] active:scale-[0.98]"
               >
-                <AppleLogo className="w-4 h-4" fill="currentColor" />
-                Download App
+                <AppleLogo className="w-[18px] h-[18px]" fill="currentColor" />
+                Get Mino
               </a>
 
-              <p className="text-center text-white/30 text-xs mt-3">14-day money-back guarantee</p>
             </div>
           </div>
 
