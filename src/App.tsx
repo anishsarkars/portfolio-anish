@@ -196,7 +196,7 @@ const HeroInteractiveApp = () => {
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [countryCode, setCountryCode] = useState('US');
-  const [quantity, setQuantity] = useState(1);
+  const quantity = 1;
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
