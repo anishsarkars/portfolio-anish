@@ -609,6 +609,21 @@ function LandingPage() {
           {/* Divider */}
           <div className="border-t border-gray-100" />
 
+          {/* TryMacApps Badge */}
+          <div className="flex justify-center py-12">
+            <a href="https://www.trymacapps.com" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform opacity-100">
+              <img
+                src="https://www.trymacapps.com/badge.png"
+                alt="Featured on TryMacApps"
+                width="200"
+                height="67"
+                className="drop-shadow-sm"
+              />
+            </a>
+          </div>
+
+          <div className="border-t border-gray-100" />
+
           {/* Footer links */}
           <div className="px-6 py-10 max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
@@ -654,18 +669,6 @@ function LandingPage() {
                 <span className="text-xs text-gray-400">Designed exclusively for macOS</span>
               </div>
             </div>
-          </div>
-
-          <div className="flex justify-center pb-10">
-            <a href="https://www.trymacapps.com" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform opacity-90 hover:opacity-100">
-              <img
-                src="https://www.trymacapps.com/badge.png"
-                alt="Featured on TryMacApps"
-                width="200"
-                height="67"
-                className="drop-shadow-sm"
-              />
-            </a>
           </div>
 
         </footer>
