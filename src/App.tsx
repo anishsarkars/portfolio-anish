@@ -654,6 +654,17 @@ function LandingPage() {
             </div>
           </div>
 
+          <div className="flex justify-center pb-10">
+            <a href="https://www.trymacapps.com" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://www.trymacapps.com/badge.png"
+                alt="Featured on TryMacApps"
+                width="200"
+                height="67"
+              />
+            </a>
+          </div>
+
         </footer>
 
       </div>
