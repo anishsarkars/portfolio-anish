@@ -310,6 +310,18 @@ function LandingPage() {
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
             </p>
+
+            <div className="flex justify-center mt-8">
+              <a href="https://www.trymacapps.com" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform opacity-90 hover:opacity-100">
+                <img
+                  src="https://www.trymacapps.com/badge.png"
+                  alt="Featured on TryMacApps"
+                  width="200"
+                  height="67"
+                  className="drop-shadow-sm"
+                />
+              </a>
+            </div>
           </div>
 
           {/* ── HIGH QUALITY HERO IMAGE ────────────────────────────────────────────────────────── */}
@@ -354,19 +366,7 @@ function LandingPage() {
           ))}
         </div>
 
-        {/* ── AS FEATURED ON ─────────────────────────────────────────────── */}
-        <div className="pb-16 flex flex-col items-center justify-center gap-5">
-          <p className="text-xs text-gray-400 font-semibold uppercase tracking-[0.2em]">Featured on</p>
-          <a href="https://www.trymacapps.com" target="_blank" rel="noopener noreferrer" className="hover:scale-105 transition-transform opacity-90 hover:opacity-100">
-            <img
-              src="https://www.trymacapps.com/badge.png"
-              alt="Featured on TryMacApps"
-              width="200"
-              height="67"
-              className="drop-shadow-sm"
-            />
-          </a>
-        </div>
+
 
 
         {/* ════════════════════════════════════════════════════════════════════
