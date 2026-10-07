@@ -637,16 +637,7 @@ function LandingPage() {
                 <p className="text-sm text-gray-400 max-w-[200px] leading-relaxed">
                   Little tasks. Done.
                 </p>
-                {/* Social icons */}
-                <div className="flex items-center gap-3 mt-1">
-                  {[
-                    { Icon: TwitterIcon, href: 'https://x.com/anishsarkars' },
-                  ].map(({ Icon, href }, i) => (
-                    <a key={href + i} href={href} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-colors">
-                      <Icon className="w-3.5 h-3.5" />
-                    </a>
-                  ))}
-                </div>
+
               </div>
 
               {/* Link columns */}
@@ -660,9 +651,7 @@ function LandingPage() {
             {/* Bottom bar */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-3 mt-10 pt-6 border-t border-gray-100">
               <p className="text-xs text-gray-400">
-                © {new Date().getFullYear()} Mino. All rights reserved. Made by Anish with{' '}
-                <Heart className="inline w-3 h-3 text-gray-400 mx-0.5" fill="currentColor" />
-                for doers.
+                © {new Date().getFullYear()} Mino. All rights reserved.
               </p>
               <div className="flex items-center gap-1.5">
                 <AppleLogo className="w-3.5 h-3.5 text-gray-400" fill="currentColor" />
