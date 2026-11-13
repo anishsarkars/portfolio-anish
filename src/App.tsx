@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Shield,
   Keyboard,
+  Copy,
 } from 'lucide-react';
 import './index.css';
 
@@ -189,7 +190,14 @@ const HeroInteractiveApp = () => {
 function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [countryCode, setCountryCode] = useState('US');
+  const [caCopied, setCaCopied] = useState(false);
   const quantity = 1;
+
+  const copyCa = () => {
+    navigator.clipboard.writeText('0xde834ddb1a0ebe140e6356bfc983bfef45256944');
+    setCaCopied(true);
+    setTimeout(() => setCaCopied(false), 2000);
+  };
 
   useEffect(() => {
     fetch('https://ipapi.co/json/')
@@ -271,9 +279,11 @@ function LandingPage() {
             className="animate-fade-in-up text-center mb-10"
             style={{ animationDelay: '0.2s', opacity: 0 }}
           >
-            <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-sm border border-gray-200/50 rounded-full px-3 py-1 mb-8">
-              <span className="text-[10px] font-bold text-[#1c1e26] uppercase tracking-wider">NEW</span>
-              <span className="text-[11px] text-[#5e6a82] font-medium">Mino Tasks</span>
+            <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-gray-200/60 rounded-full px-3.5 py-1 mb-8 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[11px] font-semibold text-[#1c1e26] uppercase tracking-wider">
+                Launched on Pons Family
+              </span>
             </div>
 
             <h1 className="text-5xl md:text-6xl lg:text-[72px] font-serif text-[#1b1d28] mb-6 leading-[1.1] max-w-4xl mx-auto tracking-tight" style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}>
@@ -303,6 +313,41 @@ function LandingPage() {
             <p className="text-[13px] text-[#5e6a82] mt-4 font-medium tracking-wide">
               One-time purchase · Instant access · macOS
             </p>
+
+            {/* CA Banner */}
+            <div className="mt-8 flex flex-col items-center justify-center gap-2.5">
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-white/80 backdrop-blur-md border border-gray-200/80 rounded-2xl p-2 sm:py-2.5 sm:px-4 shadow-sm hover:border-gray-300 transition-all max-w-full">
+                <span className="bg-[#12131a] text-white text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider flex-shrink-0">
+                  CA
+                </span>
+                <span className="font-mono text-xs sm:text-sm text-gray-800 break-all select-all font-medium">
+                  0xde834ddb1a0ebe140e6356bfc983bfef45256944
+                </span>
+                <button
+                  type="button"
+                  onClick={copyCa}
+                  className="inline-flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 active:scale-95 text-gray-700 px-2.5 py-1 rounded-xl text-xs font-medium transition-all flex-shrink-0 cursor-pointer"
+                  title="Copy CA to clipboard"
+                  aria-label="Copy CA"
+                >
+                  {caCopied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                      <span className="text-emerald-600 font-semibold">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <p className="text-xs text-[#5e6a82] font-medium flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Launched on pons family
+              </p>
+            </div>
           </div>
 
           {/* ── HIGH QUALITY HERO IMAGE ────────────────────────────────────────────────────────── */}
